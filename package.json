@@ -1,5 +1,5 @@
 {
-  "name": "openpgp",
+  "name": "@activeprospect/openpgp",
   "description": "OpenPGP.js is a Javascript implementation of the OpenPGP protocol. This is defined in RFC 4880.",
   "version": "2.5.8",
   "license": "LGPL-3.0+",
