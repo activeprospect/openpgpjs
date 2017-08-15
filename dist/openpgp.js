@@ -16764,7 +16764,7 @@ exports.default = {
   tolerant: true, // ignore unsupported/unrecognizable packets instead of throwing an error
   show_version: true,
   show_comment: true,
-  versionstring: "OpenPGP.js v2.6.0",
+  versionstring: "OpenPGP.js v2.6.1",
   commentstring: "https://openpgpjs.org",
   keyserver: "https://keyserver.ubuntu.com",
   node_store: './openpgp.store'
@@ -32648,7 +32648,7 @@ function ArmorStream(message_stream) {
   var push = message_stream.push.bind(message_stream);
   message_stream.push = this._push.bind(this);
   this.on('data', function (data) {
-    push(data);
+    push(Buffer.from(data));
   });
   this.on('end', function () {
     push(null);
