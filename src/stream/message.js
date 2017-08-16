@@ -1,6 +1,6 @@
 'use strict';
 
-import _util from '../util';
+import _util from '../util.js';
 import HeaderPacketStream from './header';
 import CipherFeedbackStream from './cipher';
 import packet from '../packet';
@@ -14,6 +14,7 @@ import ChunkedStream from './chunked.js';
 import CompressionStream from './compression.js';
 import util from 'util';
 
+const Buffer = _util.getNativeBuffer();
 
 export default function MessageStream(keys, opts) {
 
@@ -113,6 +114,14 @@ export default function MessageStream(keys, opts) {
 }
 
 util.inherits(MessageStream, HeaderPacketStream);
+
+MessageStream.prototype.push = function(data, encoding) {
+  if (data) {
+    HeaderPacketStream.prototype.push.call(this, Buffer.from(data), encoding);
+  } else {
+    HeaderPacketStream.prototype.push.call(this, null);
+  }
+};
 
 MessageStream.prototype.literalPacketHeader = function() {
   return Buffer.concat([
