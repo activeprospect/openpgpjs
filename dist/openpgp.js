@@ -16764,7 +16764,7 @@ exports.default = {
   tolerant: true, // ignore unsupported/unrecognizable packets instead of throwing an error
   show_version: true,
   show_comment: true,
-  versionstring: "OpenPGP.js v2.6.0",
+  versionstring: "OpenPGP.js v2.6.5",
   commentstring: "https://openpgpjs.org",
   keyserver: "https://keyserver.ubuntu.com",
   node_store: './openpgp.store'
@@ -18953,7 +18953,6 @@ exports.default = {
 };
 
 },{"../type/mpi.js":119,"./cipher":57,"./public_key":71,"./random.js":74}],60:[function(_dereq_,module,exports){
-(function (Buffer){
 // OpenPGP.js - An OpenPGP implementation in javascript
 // Copyright (C) 2016 Tankred Hase
 //
@@ -19001,6 +19000,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var webCrypto = _util2.default.getWebCrypto(); // no GCM support in IE11, Safari 9
 var nodeCrypto = _util2.default.getNodeCrypto();
+var Buffer = _util2.default.getNativeBuffer();
 
 var ivLength = exports.ivLength = 12; // size of the IV in bytes
 var TAG_LEN = 16; // size of the tag in bytes
@@ -19097,30 +19097,30 @@ function nodeDecrypt(ct, key, iv) {
   return Promise.resolve(_util2.default.buffer2Uint8Array(pt));
 }
 
-}).call(this,_dereq_("buffer").Buffer)
-},{"../config":51,"../util.js":121,"asmcrypto-lite":1,"buffer":18}],61:[function(_dereq_,module,exports){
-(function (Buffer){
+},{"../config":51,"../util.js":121,"asmcrypto-lite":1}],61:[function(_dereq_,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _util = _dereq_('../../util.js');
+var _util2 = _dereq_('../../util.js');
 
-var _util2 = _interopRequireDefault(_util);
+var _util3 = _interopRequireDefault(_util2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// sha-1 padding bytes not initialized yet
-var _padding = null; /**
-                      * Secure Hash Algorithm with 160-bit digest (SHA-1) implementation.
-                      *
-                      * @author Dave Longley
-                      *
-                      * Copyright (c) 2010-2014 Digital Bazaar, Inc.
-                      */
+var Buffer = _util3.default.getNativeBuffer();
 
+// sha-1 padding bytes not initialized yet
+/**
+ * Secure Hash Algorithm with 160-bit digest (SHA-1) implementation.
+ *
+ * @author Dave Longley
+ *
+ * Copyright (c) 2010-2014 Digital Bazaar, Inc.
+ */
+var _padding = null;
 var _initialized = false;
 
 /**
@@ -19269,7 +19269,7 @@ function create() {
     rval.writeInt32BE(s2.h2, 8);
     rval.writeInt32BE(s2.h3, 12);
     rval.writeInt32BE(s2.h4, 16);
-    return _util2.default.buffer2Uint8Array(rval);
+    return _util3.default.buffer2Uint8Array(rval);
   };
 
   return md;
@@ -19390,9 +19390,7 @@ function _update(s, w, bytes) {
 
 exports.default = { create: create };
 
-}).call(this,_dereq_("buffer").Buffer)
-},{"../../util.js":121,"buffer":18}],62:[function(_dereq_,module,exports){
-(function (Buffer){
+},{"../../util.js":121}],62:[function(_dereq_,module,exports){
 /**
  * Secure Hash Algorithm with 256-bit digest (SHA-256) implementation.
  *
@@ -19421,6 +19419,8 @@ var _util4 = _dereq_('../../util.js');
 var _util5 = _interopRequireDefault(_util4);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Buffer = _util5.default.getNativeBuffer();
 
 // sha-256 padding bytes not initialized yet
 var _padding = null;
@@ -19668,9 +19668,7 @@ function create() {
 
 exports.default = { create: create };
 
-}).call(this,_dereq_("buffer").Buffer)
-},{"../../util.js":121,"buffer":18,"util":44}],63:[function(_dereq_,module,exports){
-(function (Buffer){
+},{"../../util.js":121,"util":44}],63:[function(_dereq_,module,exports){
 /**
  * @requires crypto/hash/sha
  * @requires crypto/hash/md5
@@ -19720,7 +19718,8 @@ var _util2 = _interopRequireDefault(_util);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var rusha = new _rusha2.default(),
-    nodeCrypto = _util2.default.getNodeCrypto();
+    nodeCrypto = _util2.default.getNodeCrypto(),
+    Buffer = _util2.default.getNativeBuffer();
 
 function node_hash(type) {
   return function (data) {
@@ -19846,8 +19845,7 @@ exports.default = {
   }
 };
 
-}).call(this,_dereq_("buffer").Buffer)
-},{"../../util.js":121,"./forge_sha1.js":61,"./forge_sha256.js":62,"./md5.js":64,"./ripe-md.js":65,"./sha.js":66,"asmcrypto-lite":1,"buffer":18,"rusha":45}],64:[function(_dereq_,module,exports){
+},{"../../util.js":121,"./forge_sha1.js":61,"./forge_sha256.js":62,"./md5.js":64,"./ripe-md.js":65,"./sha.js":66,"asmcrypto-lite":1,"rusha":45}],64:[function(_dereq_,module,exports){
 /**
  * A fast MD5 JavaScript implementation
  * Copyright (c) 2012 Joseph Myers
@@ -31820,7 +31818,6 @@ SymEncryptedAEADProtected.prototype.encrypt = function (sessionKeyAlgorithm, key
 };
 
 },{"../crypto":67,"../enums.js":78,"../util.js":121}],103:[function(_dereq_,module,exports){
-(function (Buffer){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -31880,7 +31877,8 @@ var _asmcryptoLite2 = _interopRequireDefault(_asmcryptoLite);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var nodeCrypto = _util2.default.getNodeCrypto();
+var nodeCrypto = _util2.default.getNodeCrypto(),
+    Buffer = _util2.default.getNativeBuffer();
 
 var VERSION = 1; // A one-octet version number of the data packet.
 
@@ -32023,8 +32021,7 @@ function nodeDecrypt(algo, ct, key) {
   return new Uint8Array(pt);
 }
 
-}).call(this,_dereq_("buffer").Buffer)
-},{"../crypto":67,"../enums.js":78,"../util.js":121,"asmcrypto-lite":1,"buffer":18}],104:[function(_dereq_,module,exports){
+},{"../crypto":67,"../enums.js":78,"../util.js":121,"asmcrypto-lite":1}],104:[function(_dereq_,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -32607,7 +32604,6 @@ function read(input) {
 }
 
 },{"./encoding/armor.js":76,"./enums.js":78,"./packet":90}],110:[function(_dereq_,module,exports){
-(function (Buffer){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -32627,11 +32623,17 @@ var _base = _dereq_('../encoding/base64.js');
 
 var _base2 = _interopRequireDefault(_base);
 
-var _util = _dereq_('util');
+var _util2 = _dereq_('util');
 
-var _util2 = _interopRequireDefault(_util);
+var _util3 = _interopRequireDefault(_util2);
+
+var _util4 = _dereq_('../util.js');
+
+var _util5 = _interopRequireDefault(_util4);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Buffer = _util5.default.getNativeBuffer();
 
 var ARMOR_HEADER = '-----BEGIN PGP MESSAGE-----\r\n';
 var ARMOR_FOOTER = '\r\n-----END PGP MESSAGE-----\r\n';
@@ -32655,7 +32657,7 @@ function ArmorStream(message_stream) {
   });
 }
 
-_util2.default.inherits(ArmorStream, _header2.default);
+_util3.default.inherits(ArmorStream, _header2.default);
 
 ArmorStream.prototype._push = function (data) {
   if (data) {
@@ -32704,9 +32706,7 @@ ArmorStream.prototype.getCheckSum = function () {
   return '=' + _base2.default.encode(Buffer.from(str, 'binary'));
 };
 
-}).call(this,_dereq_("buffer").Buffer)
-},{"../encoding/armor.js":76,"../encoding/base64.js":77,"./header.js":114,"buffer":18,"util":44}],111:[function(_dereq_,module,exports){
-(function (Buffer){
+},{"../encoding/armor.js":76,"../encoding/base64.js":77,"../util.js":121,"./header.js":114,"util":44}],111:[function(_dereq_,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -32722,11 +32722,17 @@ var _header = _dereq_('./header.js');
 
 var _header2 = _interopRequireDefault(_header);
 
-var _util = _dereq_('util');
+var _util2 = _dereq_('util');
 
-var _util2 = _interopRequireDefault(_util);
+var _util3 = _interopRequireDefault(_util2);
+
+var _util4 = _dereq_('../util.js');
+
+var _util5 = _interopRequireDefault(_util4);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Buffer = _util5.default.getNativeBuffer();
 
 function ChunkedStream(opts) {
   opts = opts || {};
@@ -32736,7 +32742,7 @@ function ChunkedStream(opts) {
   this.started = false;
 }
 
-_util2.default.inherits(ChunkedStream, _header2.default);
+_util3.default.inherits(ChunkedStream, _header2.default);
 
 ChunkedStream.prototype.getHeader = function () {
   return this.header;
@@ -32768,9 +32774,7 @@ ChunkedStream.prototype._flush = function (callback) {
   callback();
 };
 
-}).call(this,_dereq_("buffer").Buffer)
-},{"../packet":90,"./header.js":114,"buffer":18,"util":44}],112:[function(_dereq_,module,exports){
-(function (Buffer){
+},{"../packet":90,"../util.js":121,"./header.js":114,"util":44}],112:[function(_dereq_,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -32779,11 +32783,17 @@ Object.defineProperty(exports, "__esModule", {
 
 var _stream = _dereq_('stream');
 
-var _util = _dereq_('util');
+var _util2 = _dereq_('util');
 
-var _util2 = _interopRequireDefault(_util);
+var _util3 = _interopRequireDefault(_util2);
+
+var _util4 = _dereq_('../util.js');
+
+var _util5 = _interopRequireDefault(_util4);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Buffer = _util5.default.getNativeBuffer();
 
 exports.default = CipherFeedbackStream;
 
@@ -32813,7 +32823,7 @@ function CipherFeedbackStream(opts) {
   this._offset = 0;
 }
 
-_util2.default.inherits(CipherFeedbackStream, _stream.Transform);
+_util3.default.inherits(CipherFeedbackStream, _stream.Transform);
 
 CipherFeedbackStream.prototype.write = function (data) {
   if (!Buffer.isBuffer(data)) {
@@ -32969,9 +32979,7 @@ CipherFeedbackStream.prototype._flush = function (cb) {
   cb();
 };
 
-}).call(this,_dereq_("buffer").Buffer)
-},{"buffer":18,"stream":41,"util":44}],113:[function(_dereq_,module,exports){
-(function (Buffer){
+},{"../util.js":121,"stream":41,"util":44}],113:[function(_dereq_,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -32999,11 +33007,17 @@ var _zlib = _dereq_('zlib');
 
 var _zlib2 = _interopRequireDefault(_zlib);
 
-var _util = _dereq_('util');
+var _util2 = _dereq_('util');
 
-var _util2 = _interopRequireDefault(_util);
+var _util3 = _interopRequireDefault(_util2);
+
+var _util4 = _dereq_('../util.js');
+
+var _util5 = _interopRequireDefault(_util4);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Buffer = _util5.default.getNativeBuffer();
 
 function CompressionStream(opts) {
   var self = this;
@@ -33041,7 +33055,7 @@ function CompressionStream(opts) {
   }
 }
 
-_util2.default.inherits(CompressionStream, _header2.default);
+_util3.default.inherits(CompressionStream, _header2.default);
 
 CompressionStream.prototype.getHeader = function () {
   this.chunkedStream.write(Buffer.from([this.algorithm]));
@@ -33058,8 +33072,7 @@ CompressionStream.prototype._flush = function (callback) {
   this.zip.end();
 };
 
-}).call(this,_dereq_("buffer").Buffer)
-},{"../enums":78,"../packet":90,"./chunked.js":111,"./header.js":114,"buffer":18,"util":44,"zlib":17}],114:[function(_dereq_,module,exports){
+},{"../enums":78,"../packet":90,"../util.js":121,"./chunked.js":111,"./header.js":114,"util":44,"zlib":17}],114:[function(_dereq_,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -33121,7 +33134,6 @@ exports.CipherFeedbackStream = _cipher2.default;
 exports.HeaderPacketStream = _header2.default;
 
 },{"./cipher":112,"./header":114,"./message":116}],116:[function(_dereq_,module,exports){
-(function (Buffer){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -33129,7 +33141,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = MessageStream;
 
-var _util2 = _dereq_('../util');
+var _util2 = _dereq_('../util.js');
 
 var _util3 = _interopRequireDefault(_util2);
 
@@ -33184,6 +33196,8 @@ var _util5 = _interopRequireDefault(_util4);
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Buffer = _util3.default.getNativeBuffer();
 
 function MessageStream(keys, opts) {
 
@@ -33281,6 +33295,14 @@ function MessageStream(keys, opts) {
 
 _util5.default.inherits(MessageStream, _header2.default);
 
+MessageStream.prototype.push = function (data, encoding) {
+  if (data) {
+    _header2.default.prototype.push.call(this, Buffer.from(data), encoding);
+  } else {
+    _header2.default.prototype.push.call(this, null);
+  }
+};
+
 MessageStream.prototype.literalPacketHeader = function () {
   return Buffer.concat([Buffer.from([_enums2.default.write(_enums2.default.literal, 'utf8'), this.filename.length]), Buffer.from(this.filename), Buffer.from(_util3.default.writeDate(new Date()))]);
 };
@@ -33363,9 +33385,7 @@ MessageStream.prototype._flush = function (cb) {
   this.literalPacket.end();
 };
 
-}).call(this,_dereq_("buffer").Buffer)
-},{"../config":51,"../crypto":67,"../enums":78,"../key.js":81,"../packet":90,"../util":121,"./armor":110,"./chunked.js":111,"./cipher":112,"./compression.js":113,"./header":114,"./signature":117,"buffer":18,"util":44}],117:[function(_dereq_,module,exports){
-(function (Buffer){
+},{"../config":51,"../crypto":67,"../enums":78,"../key.js":81,"../packet":90,"../util.js":121,"./armor":110,"./chunked.js":111,"./cipher":112,"./compression.js":113,"./header":114,"./signature":117,"util":44}],117:[function(_dereq_,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -33390,9 +33410,15 @@ var _packet = _dereq_('../packet');
 
 var _packet2 = _interopRequireDefault(_packet);
 
+var _util2 = _dereq_('../util');
+
+var _util3 = _interopRequireDefault(_util2);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Buffer = _util3.default.getNativeBuffer();
 
 var Signature = function () {
   function Signature(privateKeys) {
@@ -33466,8 +33492,7 @@ var Signature = function () {
 
 exports.default = Signature;
 
-}).call(this,_dereq_("buffer").Buffer)
-},{"../config":51,"../crypto":67,"../enums.js":78,"../packet":90,"buffer":18}],118:[function(_dereq_,module,exports){
+},{"../config":51,"../crypto":67,"../enums.js":78,"../packet":90,"../util":121}],118:[function(_dereq_,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -33912,6 +33937,7 @@ S2K.fromClone = function (clone) {
 };
 
 },{"../crypto":67,"../enums.js":78,"../util.js":121}],121:[function(_dereq_,module,exports){
+(function (Buffer){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -34473,11 +34499,25 @@ exports.default = {
     }
 
     return _dereq_('crypto');
+  },
+
+  /**
+   * Get native Node.js Buffer constructor or browserify buffer, whichever is
+   * appropriate for our needs.
+   * @return {Function}   The Buffer constructor or 'undefined'
+   */
+  getNativeBuffer: function getNativeBuffer() {
+    if (!this.detectNode()) {
+      return Buffer;
+    }
+
+    return _dereq_('buffer').Buffer;
   }
 
 };
 
-},{"./config":51,"crypto":"crypto"}],122:[function(_dereq_,module,exports){
+}).call(this,_dereq_("buffer").Buffer)
+},{"./config":51,"buffer":18,"crypto":"crypto"}],122:[function(_dereq_,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
