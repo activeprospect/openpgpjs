@@ -1,4 +1,4 @@
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.openpgp = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.openpgp = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /*! asmCrypto Lite v1.1.0, (c) 2013 Artem S Vybornov, opensource.org/licenses/MIT */
 (function ( exports, global ) {
 
@@ -2940,7 +2940,7 @@ exports.SHA256 = sha256_constructor;
 
 return exports;
 })( {}, function(){return this}() );
-},{}],2:[function(_dereq_,module,exports){
+},{}],2:[function(require,module,exports){
 (function (process,global){
 /*!
  * @overview es6-promise - a tiny implementation of Promises/A+.
@@ -3071,7 +3071,7 @@ return exports;
 
     function lib$es6$promise$asap$$attemptVertx() {
       try {
-        var r = _dereq_;
+        var r = require;
         var vertx = r('vertx');
         lib$es6$promise$asap$$vertxNext = vertx.runOnLoop || vertx.runOnContext;
         return lib$es6$promise$asap$$useVertxTimer();
@@ -3088,7 +3088,7 @@ return exports;
       lib$es6$promise$asap$$scheduleFlush = lib$es6$promise$asap$$useMutationObserver();
     } else if (lib$es6$promise$asap$$isWorker) {
       lib$es6$promise$asap$$scheduleFlush = lib$es6$promise$asap$$useMessageChannel();
-    } else if (lib$es6$promise$asap$$browserWindow === undefined && typeof _dereq_ === 'function') {
+    } else if (lib$es6$promise$asap$$browserWindow === undefined && typeof require === 'function') {
       lib$es6$promise$asap$$scheduleFlush = lib$es6$promise$asap$$attemptVertx();
     } else {
       lib$es6$promise$asap$$scheduleFlush = lib$es6$promise$asap$$useSetTimeout();
@@ -3902,8 +3902,8 @@ return exports;
 }).call(this);
 
 
-}).call(this,_dereq_('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":25}],3:[function(_dereq_,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"_process":25}],3:[function(require,module,exports){
 // http://wiki.commonjs.org/wiki/Unit_Testing/1.0
 //
 // THIS IS NOT TESTED NOR LIKELY TO WORK OUTSIDE V8!
@@ -3931,7 +3931,7 @@ return exports;
 // when used in node, this will actually load the util module we depend on
 // versus loading the builtin util module as happens otherwise
 // this is a bug in node module loading as far as I am concerned
-var util = _dereq_('util/');
+var util = require('util/');
 
 var pSlice = Array.prototype.slice;
 var hasOwn = Object.prototype.hasOwnProperty;
@@ -4264,9 +4264,9 @@ var objectKeys = Object.keys || function (obj) {
   return keys;
 };
 
-},{"util/":44}],4:[function(_dereq_,module,exports){
+},{"util/":44}],4:[function(require,module,exports){
 
-},{}],5:[function(_dereq_,module,exports){
+},{}],5:[function(require,module,exports){
 'use strict';
 
 
@@ -4370,7 +4370,7 @@ exports.setTyped = function (on) {
 
 exports.setTyped(TYPED_OK);
 
-},{}],6:[function(_dereq_,module,exports){
+},{}],6:[function(require,module,exports){
 'use strict';
 
 // Note: adler32 takes 12% for level 0 and 2% for level 6.
@@ -4404,7 +4404,7 @@ function adler32(adler, buf, len, pos) {
 
 module.exports = adler32;
 
-},{}],7:[function(_dereq_,module,exports){
+},{}],7:[function(require,module,exports){
 module.exports = {
 
   /* Allowed flush values; see deflate() and inflate() below for details */
@@ -4453,7 +4453,7 @@ module.exports = {
   //Z_NULL:                 null // Use -1 or null inline, depending on var type
 };
 
-},{}],8:[function(_dereq_,module,exports){
+},{}],8:[function(require,module,exports){
 'use strict';
 
 // Note: we can't get significant speed boost here.
@@ -4496,14 +4496,14 @@ function crc32(crc, buf, len, pos) {
 
 module.exports = crc32;
 
-},{}],9:[function(_dereq_,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
-var utils   = _dereq_('../utils/common');
-var trees   = _dereq_('./trees');
-var adler32 = _dereq_('./adler32');
-var crc32   = _dereq_('./crc32');
-var msg   = _dereq_('./messages');
+var utils   = require('../utils/common');
+var trees   = require('./trees');
+var adler32 = require('./adler32');
+var crc32   = require('./crc32');
+var msg   = require('./messages');
 
 /* Public constants ==========================================================*/
 /* ===========================================================================*/
@@ -6263,7 +6263,7 @@ exports.deflatePrime = deflatePrime;
 exports.deflateTune = deflateTune;
 */
 
-},{"../utils/common":5,"./adler32":6,"./crc32":8,"./messages":13,"./trees":14}],10:[function(_dereq_,module,exports){
+},{"../utils/common":5,"./adler32":6,"./crc32":8,"./messages":13,"./trees":14}],10:[function(require,module,exports){
 'use strict';
 
 // See state defs from inflate.js
@@ -6591,15 +6591,15 @@ module.exports = function inflate_fast(strm, start) {
   return;
 };
 
-},{}],11:[function(_dereq_,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 
 
-var utils = _dereq_('../utils/common');
-var adler32 = _dereq_('./adler32');
-var crc32   = _dereq_('./crc32');
-var inflate_fast = _dereq_('./inffast');
-var inflate_table = _dereq_('./inftrees');
+var utils = require('../utils/common');
+var adler32 = require('./adler32');
+var crc32   = require('./crc32');
+var inflate_fast = require('./inffast');
+var inflate_table = require('./inftrees');
 
 var CODES = 0;
 var LENS = 1;
@@ -8096,11 +8096,11 @@ exports.inflateSyncPoint = inflateSyncPoint;
 exports.inflateUndermine = inflateUndermine;
 */
 
-},{"../utils/common":5,"./adler32":6,"./crc32":8,"./inffast":10,"./inftrees":12}],12:[function(_dereq_,module,exports){
+},{"../utils/common":5,"./adler32":6,"./crc32":8,"./inffast":10,"./inftrees":12}],12:[function(require,module,exports){
 'use strict';
 
 
-var utils = _dereq_('../utils/common');
+var utils = require('../utils/common');
 
 var MAXBITS = 15;
 var ENOUGH_LENS = 852;
@@ -8425,7 +8425,7 @@ module.exports = function inflate_table(type, lens, lens_index, codes, table, ta
   return 0;
 };
 
-},{"../utils/common":5}],13:[function(_dereq_,module,exports){
+},{"../utils/common":5}],13:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -8440,11 +8440,11 @@ module.exports = {
   '-6':   'incompatible version' /* Z_VERSION_ERROR (-6) */
 };
 
-},{}],14:[function(_dereq_,module,exports){
+},{}],14:[function(require,module,exports){
 'use strict';
 
 
-var utils = _dereq_('../utils/common');
+var utils = require('../utils/common');
 
 /* Public constants ==========================================================*/
 /* ===========================================================================*/
@@ -9641,7 +9641,7 @@ exports._tr_flush_block  = _tr_flush_block;
 exports._tr_tally = _tr_tally;
 exports._tr_align = _tr_align;
 
-},{"../utils/common":5}],15:[function(_dereq_,module,exports){
+},{"../utils/common":5}],15:[function(require,module,exports){
 'use strict';
 
 
@@ -9672,13 +9672,13 @@ function ZStream() {
 
 module.exports = ZStream;
 
-},{}],16:[function(_dereq_,module,exports){
+},{}],16:[function(require,module,exports){
 (function (process,Buffer){
-var msg = _dereq_('pako/lib/zlib/messages');
-var zstream = _dereq_('pako/lib/zlib/zstream');
-var zlib_deflate = _dereq_('pako/lib/zlib/deflate.js');
-var zlib_inflate = _dereq_('pako/lib/zlib/inflate.js');
-var constants = _dereq_('pako/lib/zlib/constants');
+var msg = require('pako/lib/zlib/messages');
+var zstream = require('pako/lib/zlib/zstream');
+var zlib_deflate = require('pako/lib/zlib/deflate.js');
+var zlib_inflate = require('pako/lib/zlib/inflate.js');
+var constants = require('pako/lib/zlib/constants');
 
 for (var key in constants) {
   exports[key] = constants[key];
@@ -9911,8 +9911,8 @@ Zlib.prototype._error = function(status) {
 
 exports.Zlib = Zlib;
 
-}).call(this,_dereq_('_process'),_dereq_("buffer").Buffer)
-},{"_process":25,"buffer":18,"pako/lib/zlib/constants":7,"pako/lib/zlib/deflate.js":9,"pako/lib/zlib/inflate.js":11,"pako/lib/zlib/messages":13,"pako/lib/zlib/zstream":15}],17:[function(_dereq_,module,exports){
+}).call(this,require('_process'),require("buffer").Buffer)
+},{"_process":25,"buffer":18,"pako/lib/zlib/constants":7,"pako/lib/zlib/deflate.js":9,"pako/lib/zlib/inflate.js":11,"pako/lib/zlib/messages":13,"pako/lib/zlib/zstream":15}],17:[function(require,module,exports){
 (function (process,Buffer){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -9935,11 +9935,11 @@ exports.Zlib = Zlib;
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-var Transform = _dereq_('_stream_transform');
+var Transform = require('_stream_transform');
 
-var binding = _dereq_('./binding');
-var util = _dereq_('util');
-var assert = _dereq_('assert').ok;
+var binding = require('./binding');
+var util = require('util');
+var assert = require('assert').ok;
 
 // zlib doesn't provide these, so kludge them in following the same
 // const naming scheme zlib uses.
@@ -10525,8 +10525,8 @@ util.inherits(DeflateRaw, Zlib);
 util.inherits(InflateRaw, Zlib);
 util.inherits(Unzip, Zlib);
 
-}).call(this,_dereq_('_process'),_dereq_("buffer").Buffer)
-},{"./binding":16,"_process":25,"_stream_transform":39,"assert":3,"buffer":18,"util":44}],18:[function(_dereq_,module,exports){
+}).call(this,require('_process'),require("buffer").Buffer)
+},{"./binding":16,"_process":25,"_stream_transform":39,"assert":3,"buffer":18,"util":44}],18:[function(require,module,exports){
 (function (global){
 /*!
  * The buffer module from node.js, for the browser.
@@ -10538,9 +10538,9 @@ util.inherits(Unzip, Zlib);
 
 'use strict'
 
-var base64 = _dereq_('base64-js')
-var ieee754 = _dereq_('ieee754')
-var isArray = _dereq_('isarray')
+var base64 = require('base64-js')
+var ieee754 = require('ieee754')
+var isArray = require('isarray')
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -12241,7 +12241,7 @@ function isnan (val) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"base64-js":19,"ieee754":20,"isarray":21}],19:[function(_dereq_,module,exports){
+},{"base64-js":19,"ieee754":20,"isarray":21}],19:[function(require,module,exports){
 'use strict'
 
 exports.toByteArray = toByteArray
@@ -12352,7 +12352,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],20:[function(_dereq_,module,exports){
+},{}],20:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -12438,14 +12438,14 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],21:[function(_dereq_,module,exports){
+},{}],21:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],22:[function(_dereq_,module,exports){
+},{}],22:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -12749,7 +12749,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],23:[function(_dereq_,module,exports){
+},{}],23:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -12774,7 +12774,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],24:[function(_dereq_,module,exports){
+},{}],24:[function(require,module,exports){
 /**
  * Determine if an object is Buffer
  *
@@ -12793,7 +12793,7 @@ module.exports = function (obj) {
     ))
 }
 
-},{}],25:[function(_dereq_,module,exports){
+},{}],25:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -12914,10 +12914,10 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],26:[function(_dereq_,module,exports){
-module.exports = _dereq_("./lib/_stream_duplex.js")
+},{}],26:[function(require,module,exports){
+module.exports = require("./lib/_stream_duplex.js")
 
-},{"./lib/_stream_duplex.js":27}],27:[function(_dereq_,module,exports){
+},{"./lib/_stream_duplex.js":27}],27:[function(require,module,exports){
 // a duplex stream is just a stream that is both readable and writable.
 // Since JS doesn't have multiple prototypal inheritance, this class
 // prototypally inherits from Readable, and then parasitically from
@@ -12938,16 +12938,16 @@ var objectKeys = Object.keys || function (obj) {
 module.exports = Duplex;
 
 /*<replacement>*/
-var processNextTick = _dereq_('process-nextick-args');
+var processNextTick = require('process-nextick-args');
 /*</replacement>*/
 
 /*<replacement>*/
-var util = _dereq_('core-util-is');
-util.inherits = _dereq_('inherits');
+var util = require('core-util-is');
+util.inherits = require('inherits');
 /*</replacement>*/
 
-var Readable = _dereq_('./_stream_readable');
-var Writable = _dereq_('./_stream_writable');
+var Readable = require('./_stream_readable');
+var Writable = require('./_stream_writable');
 
 util.inherits(Duplex, Readable);
 
@@ -12993,7 +12993,7 @@ function forEach(xs, f) {
     f(xs[i], i);
   }
 }
-},{"./_stream_readable":29,"./_stream_writable":31,"core-util-is":33,"inherits":23,"process-nextick-args":35}],28:[function(_dereq_,module,exports){
+},{"./_stream_readable":29,"./_stream_writable":31,"core-util-is":33,"inherits":23,"process-nextick-args":35}],28:[function(require,module,exports){
 // a passthrough stream.
 // basically just the most minimal sort of Transform stream.
 // Every written chunk gets output as-is.
@@ -13002,11 +13002,11 @@ function forEach(xs, f) {
 
 module.exports = PassThrough;
 
-var Transform = _dereq_('./_stream_transform');
+var Transform = require('./_stream_transform');
 
 /*<replacement>*/
-var util = _dereq_('core-util-is');
-util.inherits = _dereq_('inherits');
+var util = require('core-util-is');
+util.inherits = require('inherits');
 /*</replacement>*/
 
 util.inherits(PassThrough, Transform);
@@ -13020,24 +13020,24 @@ function PassThrough(options) {
 PassThrough.prototype._transform = function (chunk, encoding, cb) {
   cb(null, chunk);
 };
-},{"./_stream_transform":30,"core-util-is":33,"inherits":23}],29:[function(_dereq_,module,exports){
+},{"./_stream_transform":30,"core-util-is":33,"inherits":23}],29:[function(require,module,exports){
 (function (process){
 'use strict';
 
 module.exports = Readable;
 
 /*<replacement>*/
-var processNextTick = _dereq_('process-nextick-args');
+var processNextTick = require('process-nextick-args');
 /*</replacement>*/
 
 /*<replacement>*/
-var isArray = _dereq_('isarray');
+var isArray = require('isarray');
 /*</replacement>*/
 
 Readable.ReadableState = ReadableState;
 
 /*<replacement>*/
-var EE = _dereq_('events').EventEmitter;
+var EE = require('events').EventEmitter;
 
 var EElistenerCount = function (emitter, type) {
   return emitter.listeners(type).length;
@@ -13048,25 +13048,25 @@ var EElistenerCount = function (emitter, type) {
 var Stream;
 (function () {
   try {
-    Stream = _dereq_('st' + 'ream');
+    Stream = require('st' + 'ream');
   } catch (_) {} finally {
-    if (!Stream) Stream = _dereq_('events').EventEmitter;
+    if (!Stream) Stream = require('events').EventEmitter;
   }
 })();
 /*</replacement>*/
 
-var Buffer = _dereq_('buffer').Buffer;
+var Buffer = require('buffer').Buffer;
 /*<replacement>*/
-var bufferShim = _dereq_('buffer-shims');
+var bufferShim = require('buffer-shims');
 /*</replacement>*/
 
 /*<replacement>*/
-var util = _dereq_('core-util-is');
-util.inherits = _dereq_('inherits');
+var util = require('core-util-is');
+util.inherits = require('inherits');
 /*</replacement>*/
 
 /*<replacement>*/
-var debugUtil = _dereq_('util');
+var debugUtil = require('util');
 var debug = void 0;
 if (debugUtil && debugUtil.debuglog) {
   debug = debugUtil.debuglog('stream');
@@ -13094,7 +13094,7 @@ function prependListener(emitter, event, fn) {
 
 var Duplex;
 function ReadableState(options, stream) {
-  Duplex = Duplex || _dereq_('./_stream_duplex');
+  Duplex = Duplex || require('./_stream_duplex');
 
   options = options || {};
 
@@ -13153,7 +13153,7 @@ function ReadableState(options, stream) {
   this.decoder = null;
   this.encoding = null;
   if (options.encoding) {
-    if (!StringDecoder) StringDecoder = _dereq_('string_decoder/').StringDecoder;
+    if (!StringDecoder) StringDecoder = require('string_decoder/').StringDecoder;
     this.decoder = new StringDecoder(options.encoding);
     this.encoding = options.encoding;
   }
@@ -13161,7 +13161,7 @@ function ReadableState(options, stream) {
 
 var Duplex;
 function Readable(options) {
-  Duplex = Duplex || _dereq_('./_stream_duplex');
+  Duplex = Duplex || require('./_stream_duplex');
 
   if (!(this instanceof Readable)) return new Readable(options);
 
@@ -13264,7 +13264,7 @@ function needMoreData(state) {
 
 // backwards compatibility.
 Readable.prototype.setEncoding = function (enc) {
-  if (!StringDecoder) StringDecoder = _dereq_('string_decoder/').StringDecoder;
+  if (!StringDecoder) StringDecoder = require('string_decoder/').StringDecoder;
   this._readableState.decoder = new StringDecoder(enc);
   this._readableState.encoding = enc;
   return this;
@@ -13915,8 +13915,8 @@ function indexOf(xs, x) {
   }
   return -1;
 }
-}).call(this,_dereq_('_process'))
-},{"./_stream_duplex":27,"_process":25,"buffer":18,"buffer-shims":32,"core-util-is":33,"events":22,"inherits":23,"isarray":34,"process-nextick-args":35,"string_decoder/":42,"util":4}],30:[function(_dereq_,module,exports){
+}).call(this,require('_process'))
+},{"./_stream_duplex":27,"_process":25,"buffer":18,"buffer-shims":32,"core-util-is":33,"events":22,"inherits":23,"isarray":34,"process-nextick-args":35,"string_decoder/":42,"util":4}],30:[function(require,module,exports){
 // a transform stream is a readable/writable stream where you do
 // something with the data.  Sometimes it's called a "filter",
 // but that's not a great name for it, since that implies a thing where
@@ -13963,11 +13963,11 @@ function indexOf(xs, x) {
 
 module.exports = Transform;
 
-var Duplex = _dereq_('./_stream_duplex');
+var Duplex = require('./_stream_duplex');
 
 /*<replacement>*/
-var util = _dereq_('core-util-is');
-util.inherits = _dereq_('inherits');
+var util = require('core-util-is');
+util.inherits = require('inherits');
 /*</replacement>*/
 
 util.inherits(Transform, Duplex);
@@ -14097,7 +14097,7 @@ function done(stream, er) {
 
   return stream.push(null);
 }
-},{"./_stream_duplex":27,"core-util-is":33,"inherits":23}],31:[function(_dereq_,module,exports){
+},{"./_stream_duplex":27,"core-util-is":33,"inherits":23}],31:[function(require,module,exports){
 (function (process){
 // A bit simpler than readable streams.
 // Implement an async ._write(chunk, encoding, cb), and it'll handle all
@@ -14108,7 +14108,7 @@ function done(stream, er) {
 module.exports = Writable;
 
 /*<replacement>*/
-var processNextTick = _dereq_('process-nextick-args');
+var processNextTick = require('process-nextick-args');
 /*</replacement>*/
 
 /*<replacement>*/
@@ -14118,13 +14118,13 @@ var asyncWrite = !process.browser && ['v0.10', 'v0.9.'].indexOf(process.version.
 Writable.WritableState = WritableState;
 
 /*<replacement>*/
-var util = _dereq_('core-util-is');
-util.inherits = _dereq_('inherits');
+var util = require('core-util-is');
+util.inherits = require('inherits');
 /*</replacement>*/
 
 /*<replacement>*/
 var internalUtil = {
-  deprecate: _dereq_('util-deprecate')
+  deprecate: require('util-deprecate')
 };
 /*</replacement>*/
 
@@ -14132,16 +14132,16 @@ var internalUtil = {
 var Stream;
 (function () {
   try {
-    Stream = _dereq_('st' + 'ream');
+    Stream = require('st' + 'ream');
   } catch (_) {} finally {
-    if (!Stream) Stream = _dereq_('events').EventEmitter;
+    if (!Stream) Stream = require('events').EventEmitter;
   }
 })();
 /*</replacement>*/
 
-var Buffer = _dereq_('buffer').Buffer;
+var Buffer = require('buffer').Buffer;
 /*<replacement>*/
-var bufferShim = _dereq_('buffer-shims');
+var bufferShim = require('buffer-shims');
 /*</replacement>*/
 
 util.inherits(Writable, Stream);
@@ -14157,7 +14157,7 @@ function WriteReq(chunk, encoding, cb) {
 
 var Duplex;
 function WritableState(options, stream) {
-  Duplex = Duplex || _dereq_('./_stream_duplex');
+  Duplex = Duplex || require('./_stream_duplex');
 
   options = options || {};
 
@@ -14273,7 +14273,7 @@ WritableState.prototype.getBuffer = function writableStateGetBuffer() {
 
 var Duplex;
 function Writable(options) {
-  Duplex = Duplex || _dereq_('./_stream_duplex');
+  Duplex = Duplex || require('./_stream_duplex');
 
   // Writable ctor is applied to Duplexes, though they're not
   // instanceof Writable, they're instanceof Readable.
@@ -14625,12 +14625,12 @@ function CorkedRequest(state) {
     }
   };
 }
-}).call(this,_dereq_('_process'))
-},{"./_stream_duplex":27,"_process":25,"buffer":18,"buffer-shims":32,"core-util-is":33,"events":22,"inherits":23,"process-nextick-args":35,"util-deprecate":36}],32:[function(_dereq_,module,exports){
+}).call(this,require('_process'))
+},{"./_stream_duplex":27,"_process":25,"buffer":18,"buffer-shims":32,"core-util-is":33,"events":22,"inherits":23,"process-nextick-args":35,"util-deprecate":36}],32:[function(require,module,exports){
 (function (global){
 'use strict';
 
-var buffer = _dereq_('buffer');
+var buffer = require('buffer');
 var Buffer = buffer.Buffer;
 var SlowBuffer = buffer.SlowBuffer;
 var MAX_LEN = buffer.kMaxLength || 2147483647;
@@ -14738,7 +14738,7 @@ exports.allocUnsafeSlow = function allocUnsafeSlow(size) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"buffer":18}],33:[function(_dereq_,module,exports){
+},{"buffer":18}],33:[function(require,module,exports){
 (function (Buffer){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -14848,10 +14848,10 @@ function objectToString(o) {
   return Object.prototype.toString.call(o);
 }
 
-}).call(this,{"isBuffer":_dereq_("../../../../insert-module-globals/node_modules/is-buffer/index.js")})
-},{"../../../../insert-module-globals/node_modules/is-buffer/index.js":24}],34:[function(_dereq_,module,exports){
+}).call(this,{"isBuffer":require("../../../../insert-module-globals/node_modules/is-buffer/index.js")})
+},{"../../../../insert-module-globals/node_modules/is-buffer/index.js":24}],34:[function(require,module,exports){
 arguments[4][21][0].apply(exports,arguments)
-},{"dup":21}],35:[function(_dereq_,module,exports){
+},{"dup":21}],35:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -14897,8 +14897,8 @@ function nextTick(fn, arg1, arg2, arg3) {
   }
 }
 
-}).call(this,_dereq_('_process'))
-},{"_process":25}],36:[function(_dereq_,module,exports){
+}).call(this,require('_process'))
+},{"_process":25}],36:[function(require,module,exports){
 (function (global){
 
 /**
@@ -14969,36 +14969,36 @@ function config (name) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],37:[function(_dereq_,module,exports){
-module.exports = _dereq_("./lib/_stream_passthrough.js")
+},{}],37:[function(require,module,exports){
+module.exports = require("./lib/_stream_passthrough.js")
 
-},{"./lib/_stream_passthrough.js":28}],38:[function(_dereq_,module,exports){
+},{"./lib/_stream_passthrough.js":28}],38:[function(require,module,exports){
 (function (process){
 var Stream = (function (){
   try {
-    return _dereq_('st' + 'ream'); // hack to fix a circular dependency issue when used with browserify
+    return require('st' + 'ream'); // hack to fix a circular dependency issue when used with browserify
   } catch(_){}
 }());
-exports = module.exports = _dereq_('./lib/_stream_readable.js');
+exports = module.exports = require('./lib/_stream_readable.js');
 exports.Stream = Stream || exports;
 exports.Readable = exports;
-exports.Writable = _dereq_('./lib/_stream_writable.js');
-exports.Duplex = _dereq_('./lib/_stream_duplex.js');
-exports.Transform = _dereq_('./lib/_stream_transform.js');
-exports.PassThrough = _dereq_('./lib/_stream_passthrough.js');
+exports.Writable = require('./lib/_stream_writable.js');
+exports.Duplex = require('./lib/_stream_duplex.js');
+exports.Transform = require('./lib/_stream_transform.js');
+exports.PassThrough = require('./lib/_stream_passthrough.js');
 
 if (!process.browser && process.env.READABLE_STREAM === 'disable' && Stream) {
   module.exports = Stream;
 }
 
-}).call(this,_dereq_('_process'))
-},{"./lib/_stream_duplex.js":27,"./lib/_stream_passthrough.js":28,"./lib/_stream_readable.js":29,"./lib/_stream_transform.js":30,"./lib/_stream_writable.js":31,"_process":25}],39:[function(_dereq_,module,exports){
-module.exports = _dereq_("./lib/_stream_transform.js")
+}).call(this,require('_process'))
+},{"./lib/_stream_duplex.js":27,"./lib/_stream_passthrough.js":28,"./lib/_stream_readable.js":29,"./lib/_stream_transform.js":30,"./lib/_stream_writable.js":31,"_process":25}],39:[function(require,module,exports){
+module.exports = require("./lib/_stream_transform.js")
 
-},{"./lib/_stream_transform.js":30}],40:[function(_dereq_,module,exports){
-module.exports = _dereq_("./lib/_stream_writable.js")
+},{"./lib/_stream_transform.js":30}],40:[function(require,module,exports){
+module.exports = require("./lib/_stream_writable.js")
 
-},{"./lib/_stream_writable.js":31}],41:[function(_dereq_,module,exports){
+},{"./lib/_stream_writable.js":31}],41:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -15022,15 +15022,15 @@ module.exports = _dereq_("./lib/_stream_writable.js")
 
 module.exports = Stream;
 
-var EE = _dereq_('events').EventEmitter;
-var inherits = _dereq_('inherits');
+var EE = require('events').EventEmitter;
+var inherits = require('inherits');
 
 inherits(Stream, EE);
-Stream.Readable = _dereq_('readable-stream/readable.js');
-Stream.Writable = _dereq_('readable-stream/writable.js');
-Stream.Duplex = _dereq_('readable-stream/duplex.js');
-Stream.Transform = _dereq_('readable-stream/transform.js');
-Stream.PassThrough = _dereq_('readable-stream/passthrough.js');
+Stream.Readable = require('readable-stream/readable.js');
+Stream.Writable = require('readable-stream/writable.js');
+Stream.Duplex = require('readable-stream/duplex.js');
+Stream.Transform = require('readable-stream/transform.js');
+Stream.PassThrough = require('readable-stream/passthrough.js');
 
 // Backwards-compat with node 0.4.x
 Stream.Stream = Stream;
@@ -15127,7 +15127,7 @@ Stream.prototype.pipe = function(dest, options) {
   return dest;
 };
 
-},{"events":22,"inherits":23,"readable-stream/duplex.js":26,"readable-stream/passthrough.js":37,"readable-stream/readable.js":38,"readable-stream/transform.js":39,"readable-stream/writable.js":40}],42:[function(_dereq_,module,exports){
+},{"events":22,"inherits":23,"readable-stream/duplex.js":26,"readable-stream/passthrough.js":37,"readable-stream/readable.js":38,"readable-stream/transform.js":39,"readable-stream/writable.js":40}],42:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -15149,7 +15149,7 @@ Stream.prototype.pipe = function(dest, options) {
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-var Buffer = _dereq_('buffer').Buffer;
+var Buffer = require('buffer').Buffer;
 
 var isBufferEncoding = Buffer.isEncoding
   || function(encoding) {
@@ -15350,14 +15350,14 @@ function base64DetectIncompleteChar(buffer) {
   this.charLength = this.charReceived ? 3 : 0;
 }
 
-},{"buffer":18}],43:[function(_dereq_,module,exports){
+},{"buffer":18}],43:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],44:[function(_dereq_,module,exports){
+},{}],44:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -15884,7 +15884,7 @@ function isPrimitive(arg) {
 }
 exports.isPrimitive = isPrimitive;
 
-exports.isBuffer = _dereq_('./support/isBuffer');
+exports.isBuffer = require('./support/isBuffer');
 
 function objectToString(o) {
   return Object.prototype.toString.call(o);
@@ -15928,7 +15928,7 @@ exports.log = function() {
  *     prototype.
  * @param {function} superCtor Constructor function to inherit prototype from.
  */
-exports.inherits = _dereq_('inherits');
+exports.inherits = require('inherits');
 
 exports._extend = function(origin, add) {
   // Don't do anything if add isn't an object
@@ -15946,8 +15946,8 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-}).call(this,_dereq_('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":43,"_process":25,"inherits":23}],45:[function(_dereq_,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./support/isBuffer":43,"_process":25,"inherits":23}],45:[function(require,module,exports){
 (function (global){
 /*
  * Rusha, a JavaScript implementation of the Secure Hash Algorithm, SHA-1,
@@ -16363,7 +16363,7 @@ function hasOwnProperty(obj, prop) {
     }
 }());
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],46:[function(_dereq_,module,exports){
+},{}],46:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -16397,23 +16397,23 @@ Object.defineProperty(exports, "__esModule", {
 exports.CleartextMessage = CleartextMessage;
 exports.readArmored = readArmored;
 
-var _config = _dereq_('./config');
+var _config = require('./config');
 
 var _config2 = _interopRequireDefault(_config);
 
-var _packet = _dereq_('./packet');
+var _packet = require('./packet');
 
 var _packet2 = _interopRequireDefault(_packet);
 
-var _enums = _dereq_('./enums.js');
+var _enums = require('./enums.js');
 
 var _enums2 = _interopRequireDefault(_enums);
 
-var _armor = _dereq_('./encoding/armor.js');
+var _armor = require('./encoding/armor.js');
 
 var _armor2 = _interopRequireDefault(_armor);
 
-var _signature = _dereq_('./signature.js');
+var _signature = require('./signature.js');
 
 var sigModule = _interopRequireWildcard(_signature);
 
@@ -16623,7 +16623,7 @@ function verifyHeaders(headers, packetlist) {
   }
 }
 
-},{"./config":51,"./encoding/armor.js":76,"./enums.js":78,"./packet":90,"./signature.js":109}],47:[function(_dereq_,module,exports){
+},{"./config":51,"./encoding/armor.js":76,"./enums.js":78,"./packet":90,"./signature.js":109}],47:[function(require,module,exports){
 /** @license zlib.js 2012 - imaya [ https://github.com/imaya/zlib.js ] The MIT License */(function() {'use strict';var n=void 0,u=!0,aa=this;function ba(e,d){var c=e.split("."),f=aa;!(c[0]in f)&&f.execScript&&f.execScript("var "+c[0]);for(var a;c.length&&(a=c.shift());)!c.length&&d!==n?f[a]=d:f=f[a]?f[a]:f[a]={}};var C="undefined"!==typeof Uint8Array&&"undefined"!==typeof Uint16Array&&"undefined"!==typeof Uint32Array&&"undefined"!==typeof DataView;function K(e,d){this.index="number"===typeof d?d:0;this.d=0;this.buffer=e instanceof(C?Uint8Array:Array)?e:new (C?Uint8Array:Array)(32768);if(2*this.buffer.length<=this.index)throw Error("invalid index");this.buffer.length<=this.index&&ca(this)}function ca(e){var d=e.buffer,c,f=d.length,a=new (C?Uint8Array:Array)(f<<1);if(C)a.set(d);else for(c=0;c<f;++c)a[c]=d[c];return e.buffer=a}
 K.prototype.a=function(e,d,c){var f=this.buffer,a=this.index,b=this.d,k=f[a],m;c&&1<d&&(e=8<d?(L[e&255]<<24|L[e>>>8&255]<<16|L[e>>>16&255]<<8|L[e>>>24&255])>>32-d:L[e]>>8-d);if(8>d+b)k=k<<d|e,b+=d;else for(m=0;m<d;++m)k=k<<1|e>>d-m-1&1,8===++b&&(b=0,f[a++]=L[k],k=0,a===f.length&&(f=ca(this)));f[a]=k;this.buffer=f;this.d=b;this.index=a};K.prototype.finish=function(){var e=this.buffer,d=this.index,c;0<this.d&&(e[d]<<=8-this.d,e[d]=L[e[d]],d++);C?c=e.subarray(0,d):(e.length=d,c=e);return c};
 var ga=new (C?Uint8Array:Array)(256),M;for(M=0;256>M;++M){for(var R=M,S=R,ha=7,R=R>>>1;R;R>>>=1)S<<=1,S|=R&1,--ha;ga[M]=(S<<ha&255)>>>0}var L=ga;function ja(e){this.buffer=new (C?Uint16Array:Array)(2*e);this.length=0}ja.prototype.getParent=function(e){return 2*((e-2)/4|0)};ja.prototype.push=function(e,d){var c,f,a=this.buffer,b;c=this.length;a[this.length++]=d;for(a[this.length++]=e;0<c;)if(f=this.getParent(c),a[c]>a[f])b=a[c],a[c]=a[f],a[f]=b,b=a[c+1],a[c+1]=a[f+1],a[f+1]=b,c=f;else break;return this.length};
@@ -16648,7 +16648,7 @@ function Ja(e,d,c){function f(a){var b=g[a][p[a]];b===d?(f(a+1),f(a+1)):--k[b];+
 1][q]=e[q],g[c-1][q]=q;for(l=0;l<c;++l)p[l]=0;1===b[c-1]&&(--k[0],++p[c-1]);for(h=c-2;0<=h;--h){t=l=0;w=p[h+1];for(q=0;q<a[h];q++)t=m[h+1][w]+m[h+1][w+1],t>e[l]?(m[h][q]=t,g[h][q]=d,w+=2):(m[h][q]=e[l],g[h][q]=l,++l);p[h]=0;1===b[h]&&f(h)}return k}
 function pa(e){var d=new (C?Uint16Array:Array)(e.length),c=[],f=[],a=0,b,k,m,g;b=0;for(k=e.length;b<k;b++)c[e[b]]=(c[e[b]]|0)+1;b=1;for(k=16;b<=k;b++)f[b]=a,a+=c[b]|0,a<<=1;b=0;for(k=e.length;b<k;b++){a=f[e[b]];f[e[b]]+=1;m=d[b]=0;for(g=e[b];m<g;m++)d[b]=d[b]<<1|a&1,a>>>=1}return d};ba("Zlib.RawDeflate",ka);ba("Zlib.RawDeflate.prototype.compress",ka.prototype.h);var Ka={NONE:0,FIXED:1,DYNAMIC:ma},V,La,$,Ma;if(Object.keys)V=Object.keys(Ka);else for(La in V=[],$=0,Ka)V[$++]=La;$=0;for(Ma=V.length;$<Ma;++$)La=V[$],ba("Zlib.RawDeflate.CompressionType."+La,Ka[La]);}).call(this); 
 
-},{}],48:[function(_dereq_,module,exports){
+},{}],48:[function(require,module,exports){
 /** @license zlib.js 2012 - imaya [ https://github.com/imaya/zlib.js ] The MIT License */(function() {'use strict';var l=this;function p(b,e){var a=b.split("."),c=l;!(a[0]in c)&&c.execScript&&c.execScript("var "+a[0]);for(var d;a.length&&(d=a.shift());)!a.length&&void 0!==e?c[d]=e:c=c[d]?c[d]:c[d]={}};var q="undefined"!==typeof Uint8Array&&"undefined"!==typeof Uint16Array&&"undefined"!==typeof Uint32Array&&"undefined"!==typeof DataView;function t(b){var e=b.length,a=0,c=Number.POSITIVE_INFINITY,d,f,g,h,k,m,r,n,s,J;for(n=0;n<e;++n)b[n]>a&&(a=b[n]),b[n]<c&&(c=b[n]);d=1<<a;f=new (q?Uint32Array:Array)(d);g=1;h=0;for(k=2;g<=a;){for(n=0;n<e;++n)if(b[n]===g){m=0;r=h;for(s=0;s<g;++s)m=m<<1|r&1,r>>=1;J=g<<16|n;for(s=m;s<d;s+=k)f[s]=J;++h}++g;h<<=1;k<<=1}return[f,a,c]};function u(b,e){this.g=[];this.h=32768;this.c=this.f=this.d=this.k=0;this.input=q?new Uint8Array(b):b;this.l=!1;this.i=v;this.q=!1;if(e||!(e={}))e.index&&(this.d=e.index),e.bufferSize&&(this.h=e.bufferSize),e.bufferType&&(this.i=e.bufferType),e.resize&&(this.q=e.resize);switch(this.i){case w:this.a=32768;this.b=new (q?Uint8Array:Array)(32768+this.h+258);break;case v:this.a=0;this.b=new (q?Uint8Array:Array)(this.h);this.e=this.v;this.m=this.s;this.j=this.t;break;default:throw Error("invalid inflate mode");
 }}var w=0,v=1;
 u.prototype.u=function(){for(;!this.l;){var b=x(this,3);b&1&&(this.l=!0);b>>>=1;switch(b){case 0:var e=this.input,a=this.d,c=this.b,d=this.a,f=e.length,g=void 0,h=void 0,k=c.length,m=void 0;this.c=this.f=0;if(a+1>=f)throw Error("invalid uncompressed block header: LEN");g=e[a++]|e[a++]<<8;if(a+1>=f)throw Error("invalid uncompressed block header: NLEN");h=e[a++]|e[a++]<<8;if(g===~h)throw Error("invalid uncompressed block header: length verify");if(a+g>e.length)throw Error("input buffer is broken");switch(this.i){case w:for(;d+
@@ -16664,7 +16664,7 @@ u.prototype.v=function(b){var e,a=this.input.length/this.d+1|0,c,d,f,g=this.inpu
 u.prototype.m=function(){var b=0,e=this.b,a=this.g,c,d=new (q?Uint8Array:Array)(this.k+(this.a-32768)),f,g,h,k;if(0===a.length)return q?this.b.subarray(32768,this.a):this.b.slice(32768,this.a);f=0;for(g=a.length;f<g;++f){c=a[f];h=0;for(k=c.length;h<k;++h)d[b++]=c[h]}f=32768;for(g=this.a;f<g;++f)d[b++]=e[f];this.g=[];return this.buffer=d};
 u.prototype.s=function(){var b,e=this.a;q?this.q?(b=new Uint8Array(e),b.set(this.b.subarray(0,e))):b=this.b.subarray(0,e):(this.b.length>e&&(this.b.length=e),b=this.b);return this.buffer=b};p("Zlib.RawInflate",u);p("Zlib.RawInflate.prototype.decompress",u.prototype.u);var T={ADAPTIVE:v,BLOCK:w},U,V,W,X;if(Object.keys)U=Object.keys(T);else for(V in U=[],W=0,T)U[W++]=V;W=0;for(X=U.length;W<X;++W)V=U[W],p("Zlib.RawInflate.BufferType."+V,T[V]);}).call(this); 
 
-},{}],49:[function(_dereq_,module,exports){
+},{}],49:[function(require,module,exports){
 /** @license zlib.js 2012 - imaya [ https://github.com/imaya/zlib.js ] The MIT License */(function() {'use strict';function l(d){throw d;}var v=void 0,x=!0,aa=this;function D(d,a){var c=d.split("."),e=aa;!(c[0]in e)&&e.execScript&&e.execScript("var "+c[0]);for(var b;c.length&&(b=c.shift());)!c.length&&a!==v?e[b]=a:e=e[b]?e[b]:e[b]={}};var F="undefined"!==typeof Uint8Array&&"undefined"!==typeof Uint16Array&&"undefined"!==typeof Uint32Array&&"undefined"!==typeof DataView;function H(d,a){this.index="number"===typeof a?a:0;this.i=0;this.buffer=d instanceof(F?Uint8Array:Array)?d:new (F?Uint8Array:Array)(32768);2*this.buffer.length<=this.index&&l(Error("invalid index"));this.buffer.length<=this.index&&this.f()}H.prototype.f=function(){var d=this.buffer,a,c=d.length,e=new (F?Uint8Array:Array)(c<<1);if(F)e.set(d);else for(a=0;a<c;++a)e[a]=d[a];return this.buffer=e};
 H.prototype.d=function(d,a,c){var e=this.buffer,b=this.index,f=this.i,g=e[b],h;c&&1<a&&(d=8<a?(N[d&255]<<24|N[d>>>8&255]<<16|N[d>>>16&255]<<8|N[d>>>24&255])>>32-a:N[d]>>8-a);if(8>a+f)g=g<<a|d,f+=a;else for(h=0;h<a;++h)g=g<<1|d>>a-h-1&1,8===++f&&(f=0,e[b++]=N[g],g=0,b===e.length&&(e=this.f()));e[b]=g;this.buffer=e;this.i=f;this.index=b};H.prototype.finish=function(){var d=this.buffer,a=this.index,c;0<this.i&&(d[a]<<=8-this.i,d[a]=N[d[a]],a++);F?c=d.subarray(0,a):(d.length=a,c=d);return c};
 var fa=new (F?Uint8Array:Array)(256),O;for(O=0;256>O;++O){for(var P=O,Q=P,ga=7,P=P>>>1;P;P>>>=1)Q<<=1,Q|=P&1,--ga;fa[O]=(Q<<ga&255)>>>0}var N=fa;function ha(d){this.buffer=new (F?Uint16Array:Array)(2*d);this.length=0}ha.prototype.getParent=function(d){return 2*((d-2)/4|0)};ha.prototype.push=function(d,a){var c,e,b=this.buffer,f;c=this.length;b[this.length++]=a;for(b[this.length++]=d;0<c;)if(e=this.getParent(c),b[c]>b[e])f=b[c],b[c]=b[e],b[e]=f,f=b[c+1],b[c+1]=b[e+1],b[e+1]=f,c=e;else break;return this.length};
@@ -16705,7 +16705,7 @@ kb.prototype.p=function(){var d=this.input,a,c;a=this.B.p();this.c=this.B.c;this
 mb.prototype.j=function(){var d,a,c,e,b,f,g,h=0;g=this.a;d=lb;switch(d){case lb:a=Math.LOG2E*Math.log(32768)-8;break;default:l(Error("invalid compression method"))}c=a<<4|d;g[h++]=c;switch(d){case lb:switch(this.h){case $.NONE:b=0;break;case $.r:b=1;break;case $.k:b=2;break;default:l(Error("unsupported compression type"))}break;default:l(Error("invalid compression method"))}e=b<<6|0;g[h++]=e|31-(256*c+e)%31;f=jb(this.input);this.A.b=h;g=this.A.j();h=g.length;F&&(g=new Uint8Array(g.buffer),g.length<=
 h+4&&(this.a=new Uint8Array(g.length+4),this.a.set(g),g=this.a),g=g.subarray(0,h+4));g[h++]=f>>24&255;g[h++]=f>>16&255;g[h++]=f>>8&255;g[h++]=f&255;return g};function nb(d,a){var c,e,b,f;if(Object.keys)c=Object.keys(a);else for(e in c=[],b=0,a)c[b++]=e;b=0;for(f=c.length;b<f;++b)e=c[b],D(d+"."+e,a[e])};D("Zlib.Inflate",kb);D("Zlib.Inflate.prototype.decompress",kb.prototype.p);nb("Zlib.Inflate.BufferType",{ADAPTIVE:Ba.D,BLOCK:Ba.F});D("Zlib.Deflate",mb);D("Zlib.Deflate.compress",function(d,a){return(new mb(d,a)).j()});D("Zlib.Deflate.prototype.compress",mb.prototype.j);nb("Zlib.Deflate.CompressionType",{NONE:$.NONE,FIXED:$.r,DYNAMIC:$.k});}).call(this); 
 
-},{}],50:[function(_dereq_,module,exports){
+},{}],50:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -16743,7 +16743,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _enums = _dereq_('../enums.js');
+var _enums = require('../enums.js');
 
 var _enums2 = _interopRequireDefault(_enums);
 
@@ -16764,13 +16764,13 @@ exports.default = {
   tolerant: true, // ignore unsupported/unrecognizable packets instead of throwing an error
   show_version: true,
   show_comment: true,
-  versionstring: "OpenPGP.js v2.6.5",
+  versionstring: "OpenPGP.js v2.6.6",
   commentstring: "https://openpgpjs.org",
   keyserver: "https://keyserver.ubuntu.com",
   node_store: './openpgp.store'
 };
 
-},{"../enums.js":78}],51:[function(_dereq_,module,exports){
+},{"../enums.js":78}],51:[function(require,module,exports){
 /**
  * @see module:config/config
  * @module config
@@ -16782,7 +16782,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _config = _dereq_('./config.js');
+var _config = require('./config.js');
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -16793,7 +16793,7 @@ Object.defineProperty(exports, 'default', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./config.js":50}],52:[function(_dereq_,module,exports){
+},{"./config.js":50}],52:[function(require,module,exports){
 // Modified by ProtonTech AG
 
 // Modified by Recurity Labs GmbH
@@ -16824,7 +16824,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _cipher = _dereq_('./cipher');
+var _cipher = require('./cipher');
 
 var _cipher2 = _interopRequireDefault(_cipher);
 
@@ -17118,7 +17118,7 @@ exports.default = {
   }
 };
 
-},{"./cipher":57}],53:[function(_dereq_,module,exports){
+},{"./cipher":57}],53:[function(require,module,exports){
 /* Rijndael (AES) Encryption
  * Copyright 2005 Herbert Hanewinkel, www.haneWIN.de
  * version 1.1, check www.haneWIN.de for the latest version
@@ -17355,7 +17355,7 @@ exports.default = {
   256: makeClass(256)
 };
 
-},{}],54:[function(_dereq_,module,exports){
+},{}],54:[function(require,module,exports){
 /* Modified by Recurity Labs GmbH
  *
  * Originally written by nklein software (nklein.com)
@@ -17584,7 +17584,7 @@ function BF(key) {
 BF.keySize = BF.prototype.keySize = 16;
 BF.blockSize = BF.prototype.blockSize = 16;
 
-},{}],55:[function(_dereq_,module,exports){
+},{}],55:[function(require,module,exports){
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -17934,7 +17934,7 @@ function Cast5(key) {
 Cast5.blockSize = Cast5.prototype.blockSize = 8;
 Cast5.keySize = Cast5.prototype.keySize = 16;
 
-},{}],56:[function(_dereq_,module,exports){
+},{}],56:[function(require,module,exports){
 //Paul Tero, July 2001
 //http://www.tero.co.uk/des/
 //
@@ -18318,7 +18318,7 @@ exports.default = {
   originalDes: OriginalDes
 };
 
-},{}],57:[function(_dereq_,module,exports){
+},{}],57:[function(require,module,exports){
 /**
  * @requires crypto/cipher/aes
  * @requires crypto/cipher/blowfish
@@ -18333,23 +18333,23 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _aes = _dereq_('./aes.js');
+var _aes = require('./aes.js');
 
 var _aes2 = _interopRequireDefault(_aes);
 
-var _des = _dereq_('./des.js');
+var _des = require('./des.js');
 
 var _des2 = _interopRequireDefault(_des);
 
-var _cast = _dereq_('./cast5.js');
+var _cast = require('./cast5.js');
 
 var _cast2 = _interopRequireDefault(_cast);
 
-var _twofish = _dereq_('./twofish.js');
+var _twofish = require('./twofish.js');
 
 var _twofish2 = _interopRequireDefault(_twofish);
 
-var _blowfish = _dereq_('./blowfish.js');
+var _blowfish = require('./blowfish.js');
 
 var _blowfish2 = _interopRequireDefault(_blowfish);
 
@@ -18376,7 +18376,7 @@ exports.default = {
   }
 };
 
-},{"./aes.js":53,"./blowfish.js":54,"./cast5.js":55,"./des.js":56,"./twofish.js":58}],58:[function(_dereq_,module,exports){
+},{"./aes.js":53,"./blowfish.js":54,"./cast5.js":55,"./des.js":56,"./twofish.js":58}],58:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18702,7 +18702,7 @@ function toArray(typedArray) {
 TF.keySize = TF.prototype.keySize = 32;
 TF.blockSize = TF.prototype.blockSize = 16;
 
-},{}],59:[function(_dereq_,module,exports){
+},{}],59:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -18736,19 +18736,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _random = _dereq_('./random.js');
+var _random = require('./random.js');
 
 var _random2 = _interopRequireDefault(_random);
 
-var _cipher = _dereq_('./cipher');
+var _cipher = require('./cipher');
 
 var _cipher2 = _interopRequireDefault(_cipher);
 
-var _public_key = _dereq_('./public_key');
+var _public_key = require('./public_key');
 
 var _public_key2 = _interopRequireDefault(_public_key);
 
-var _mpi = _dereq_('../type/mpi.js');
+var _mpi = require('../type/mpi.js');
 
 var _mpi2 = _interopRequireDefault(_mpi);
 
@@ -18952,7 +18952,7 @@ exports.default = {
   }
 };
 
-},{"../type/mpi.js":119,"./cipher":57,"./public_key":71,"./random.js":74}],60:[function(_dereq_,module,exports){
+},{"../type/mpi.js":119,"./cipher":57,"./public_key":71,"./random.js":74}],60:[function(require,module,exports){
 // OpenPGP.js - An OpenPGP implementation in javascript
 // Copyright (C) 2016 Tankred Hase
 //
@@ -18984,15 +18984,15 @@ exports.ivLength = undefined;
 exports.encrypt = encrypt;
 exports.decrypt = decrypt;
 
-var _util = _dereq_('../util.js');
+var _util = require('../util.js');
 
 var _util2 = _interopRequireDefault(_util);
 
-var _config = _dereq_('../config');
+var _config = require('../config');
 
 var _config2 = _interopRequireDefault(_config);
 
-var _asmcryptoLite = _dereq_('asmcrypto-lite');
+var _asmcryptoLite = require('asmcrypto-lite');
 
 var _asmcryptoLite2 = _interopRequireDefault(_asmcryptoLite);
 
@@ -19097,14 +19097,14 @@ function nodeDecrypt(ct, key, iv) {
   return Promise.resolve(_util2.default.buffer2Uint8Array(pt));
 }
 
-},{"../config":51,"../util.js":121,"asmcrypto-lite":1}],61:[function(_dereq_,module,exports){
+},{"../config":51,"../util.js":121,"asmcrypto-lite":1}],61:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _util2 = _dereq_('../../util.js');
+var _util2 = require('../../util.js');
 
 var _util3 = _interopRequireDefault(_util2);
 
@@ -19390,7 +19390,7 @@ function _update(s, w, bytes) {
 
 exports.default = { create: create };
 
-},{"../../util.js":121}],62:[function(_dereq_,module,exports){
+},{"../../util.js":121}],62:[function(require,module,exports){
 /**
  * Secure Hash Algorithm with 256-bit digest (SHA-256) implementation.
  *
@@ -19410,11 +19410,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _util2 = _dereq_('util');
+var _util2 = require('util');
 
 var _util3 = _interopRequireDefault(_util2);
 
-var _util4 = _dereq_('../../util.js');
+var _util4 = require('../../util.js');
 
 var _util5 = _interopRequireDefault(_util4);
 
@@ -19668,7 +19668,7 @@ function create() {
 
 exports.default = { create: create };
 
-},{"../../util.js":121,"util":44}],63:[function(_dereq_,module,exports){
+},{"../../util.js":121,"util":44}],63:[function(require,module,exports){
 /**
  * @requires crypto/hash/sha
  * @requires crypto/hash/md5
@@ -19683,35 +19683,35 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _sha = _dereq_('./sha.js');
+var _sha = require('./sha.js');
 
 var _sha2 = _interopRequireDefault(_sha);
 
-var _asmcryptoLite = _dereq_('asmcrypto-lite');
+var _asmcryptoLite = require('asmcrypto-lite');
 
 var _asmcryptoLite2 = _interopRequireDefault(_asmcryptoLite);
 
-var _rusha = _dereq_('rusha');
+var _rusha = require('rusha');
 
 var _rusha2 = _interopRequireDefault(_rusha);
 
-var _md = _dereq_('./md5.js');
+var _md = require('./md5.js');
 
 var _md2 = _interopRequireDefault(_md);
 
-var _ripeMd = _dereq_('./ripe-md.js');
+var _ripeMd = require('./ripe-md.js');
 
 var _ripeMd2 = _interopRequireDefault(_ripeMd);
 
-var _forge_sha = _dereq_('./forge_sha1.js');
+var _forge_sha = require('./forge_sha1.js');
 
 var _forge_sha2 = _interopRequireDefault(_forge_sha);
 
-var _forge_sha3 = _dereq_('./forge_sha256.js');
+var _forge_sha3 = require('./forge_sha256.js');
 
 var _forge_sha4 = _interopRequireDefault(_forge_sha3);
 
-var _util = _dereq_('../../util.js');
+var _util = require('../../util.js');
 
 var _util2 = _interopRequireDefault(_util);
 
@@ -19845,7 +19845,7 @@ exports.default = {
   }
 };
 
-},{"../../util.js":121,"./forge_sha1.js":61,"./forge_sha256.js":62,"./md5.js":64,"./ripe-md.js":65,"./sha.js":66,"asmcrypto-lite":1,"rusha":45}],64:[function(_dereq_,module,exports){
+},{"../../util.js":121,"./forge_sha1.js":61,"./forge_sha256.js":62,"./md5.js":64,"./ripe-md.js":65,"./sha.js":66,"asmcrypto-lite":1,"rusha":45}],64:[function(require,module,exports){
 /**
  * A fast MD5 JavaScript implementation
  * Copyright (c) 2012 Joseph Myers
@@ -19877,7 +19877,7 @@ exports.default = function (entree) {
   return bin;
 };
 
-var _util = _dereq_('../../util.js');
+var _util = require('../../util.js');
 
 var _util2 = _interopRequireDefault(_util);
 
@@ -20071,7 +20071,7 @@ function add32(a, b) {
   return a + b & 0xFFFFFFFF;
 }
 
-},{"../../util.js":121}],65:[function(_dereq_,module,exports){
+},{"../../util.js":121}],65:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -20079,7 +20079,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = RMDstring;
 
-var _util = _dereq_("../../util.js");
+var _util = require("../../util.js");
 
 var _util2 = _interopRequireDefault(_util);
 
@@ -20346,7 +20346,7 @@ function RMDstring(message) {
   return _util2.default.str2Uint8Array(retString);
 }
 
-},{"../../util.js":121}],66:[function(_dereq_,module,exports){
+},{"../../util.js":121}],66:[function(require,module,exports){
 /**
  * @preserve A JavaScript implementation of the SHA family of hashes, as
  * defined in FIPS PUB 180-2 as well as the corresponding HMAC implementation
@@ -21680,7 +21680,7 @@ exports.default = {
   }
 };
 
-},{}],67:[function(_dereq_,module,exports){
+},{}],67:[function(require,module,exports){
 /**
  * @see module:crypto/crypto
  * @module crypto
@@ -21692,39 +21692,39 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _cipher = _dereq_('./cipher');
+var _cipher = require('./cipher');
 
 var _cipher2 = _interopRequireDefault(_cipher);
 
-var _hash = _dereq_('./hash');
+var _hash = require('./hash');
 
 var _hash2 = _interopRequireDefault(_hash);
 
-var _cfb = _dereq_('./cfb');
+var _cfb = require('./cfb');
 
 var _cfb2 = _interopRequireDefault(_cfb);
 
-var _gcm = _dereq_('./gcm');
+var _gcm = require('./gcm');
 
 var gcm = _interopRequireWildcard(_gcm);
 
-var _public_key = _dereq_('./public_key');
+var _public_key = require('./public_key');
 
 var _public_key2 = _interopRequireDefault(_public_key);
 
-var _signature = _dereq_('./signature');
+var _signature = require('./signature');
 
 var _signature2 = _interopRequireDefault(_signature);
 
-var _random = _dereq_('./random');
+var _random = require('./random');
 
 var _random2 = _interopRequireDefault(_random);
 
-var _pkcs = _dereq_('./pkcs1');
+var _pkcs = require('./pkcs1');
 
 var _pkcs2 = _interopRequireDefault(_pkcs);
 
-var _crypto = _dereq_('./crypto.js');
+var _crypto = require('./crypto.js');
 
 var _crypto2 = _interopRequireDefault(_crypto);
 
@@ -21757,7 +21757,7 @@ for (var i in _crypto2.default) {
 
 exports.default = mod;
 
-},{"./cfb":52,"./cipher":57,"./crypto.js":59,"./gcm":60,"./hash":63,"./pkcs1":68,"./public_key":71,"./random":74,"./signature":75}],68:[function(_dereq_,module,exports){
+},{"./cfb":52,"./cipher":57,"./crypto.js":59,"./gcm":60,"./hash":63,"./pkcs1":68,"./public_key":71,"./random":74,"./signature":75}],68:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -21791,19 +21791,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _random = _dereq_('./random.js');
+var _random = require('./random.js');
 
 var _random2 = _interopRequireDefault(_random);
 
-var _util = _dereq_('../util.js');
+var _util = require('../util.js');
 
 var _util2 = _interopRequireDefault(_util);
 
-var _jsbn = _dereq_('./public_key/jsbn.js');
+var _jsbn = require('./public_key/jsbn.js');
 
 var _jsbn2 = _interopRequireDefault(_jsbn);
 
-var _hash = _dereq_('./hash');
+var _hash = require('./hash');
 
 var _hash2 = _interopRequireDefault(_hash);
 
@@ -21933,7 +21933,7 @@ exports.default = {
   }
 };
 
-},{"../util.js":121,"./hash":63,"./public_key/jsbn.js":72,"./random.js":74}],69:[function(_dereq_,module,exports){
+},{"../util.js":121,"./hash":63,"./public_key/jsbn.js":72,"./random.js":74}],69:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -21968,23 +21968,23 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = DSA;
 
-var _jsbn = _dereq_('./jsbn.js');
+var _jsbn = require('./jsbn.js');
 
 var _jsbn2 = _interopRequireDefault(_jsbn);
 
-var _random = _dereq_('../random.js');
+var _random = require('../random.js');
 
 var _random2 = _interopRequireDefault(_random);
 
-var _hash = _dereq_('../hash');
+var _hash = require('../hash');
 
 var _hash2 = _interopRequireDefault(_hash);
 
-var _util = _dereq_('../../util.js');
+var _util = require('../../util.js');
 
 var _util2 = _interopRequireDefault(_util);
 
-var _config = _dereq_('../../config');
+var _config = require('../../config');
 
 var _config2 = _interopRequireDefault(_config);
 
@@ -22076,7 +22076,7 @@ function DSA() {
   this.verify = verify;
 }
 
-},{"../../config":51,"../../util.js":121,"../hash":63,"../random.js":74,"./jsbn.js":72}],70:[function(_dereq_,module,exports){
+},{"../../config":51,"../../util.js":121,"../hash":63,"../random.js":74,"./jsbn.js":72}],70:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -22110,15 +22110,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = Elgamal;
 
-var _jsbn = _dereq_('./jsbn.js');
+var _jsbn = require('./jsbn.js');
 
 var _jsbn2 = _interopRequireDefault(_jsbn);
 
-var _random = _dereq_('../random.js');
+var _random = require('../random.js');
 
 var _random2 = _interopRequireDefault(_random);
 
-var _util = _dereq_('../../util.js');
+var _util = require('../../util.js');
 
 var _util2 = _interopRequireDefault(_util);
 
@@ -22149,7 +22149,7 @@ function Elgamal() {
   this.decrypt = decrypt;
 }
 
-},{"../../util.js":121,"../random.js":74,"./jsbn.js":72}],71:[function(_dereq_,module,exports){
+},{"../../util.js":121,"../random.js":74,"./jsbn.js":72}],71:[function(require,module,exports){
 /**
  * @requires crypto/public_key/dsa
  * @requires crypto/public_key/elgamal
@@ -22165,15 +22165,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _rsa = _dereq_('./rsa.js');
+var _rsa = require('./rsa.js');
 
 var _rsa2 = _interopRequireDefault(_rsa);
 
-var _elgamal = _dereq_('./elgamal.js');
+var _elgamal = require('./elgamal.js');
 
 var _elgamal2 = _interopRequireDefault(_elgamal);
 
-var _dsa = _dereq_('./dsa.js');
+var _dsa = require('./dsa.js');
 
 var _dsa2 = _interopRequireDefault(_dsa);
 
@@ -22187,7 +22187,7 @@ exports.default = {
 };
 /** @see module:crypto/public_key/dsa */
 
-},{"./dsa.js":69,"./elgamal.js":70,"./rsa.js":73}],72:[function(_dereq_,module,exports){
+},{"./dsa.js":69,"./elgamal.js":70,"./rsa.js":73}],72:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22195,7 +22195,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = BigInteger;
 
-var _util = _dereq_("../../util.js");
+var _util = require("../../util.js");
 
 var _util2 = _interopRequireDefault(_util);
 
@@ -23873,7 +23873,7 @@ BigInteger.prototype.toMPI = bnToMPI;
 // JSBN-specific extension
 BigInteger.prototype.square = bnSquare;
 
-},{"../../util.js":121}],73:[function(_dereq_,module,exports){
+},{"../../util.js":121}],73:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -23907,19 +23907,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = RSA;
 
-var _jsbn = _dereq_('./jsbn.js');
+var _jsbn = require('./jsbn.js');
 
 var _jsbn2 = _interopRequireDefault(_jsbn);
 
-var _util = _dereq_('../../util.js');
+var _util = require('../../util.js');
 
 var _util2 = _interopRequireDefault(_util);
 
-var _random = _dereq_('../random.js');
+var _random = require('../random.js');
 
 var _random2 = _interopRequireDefault(_random);
 
-var _config = _dereq_('../../config');
+var _config = require('../../config');
 
 var _config2 = _interopRequireDefault(_config);
 
@@ -24164,7 +24164,7 @@ function RSA() {
   this.keyObject = KeyObject;
 }
 
-},{"../../config":51,"../../util.js":121,"../random.js":74,"./jsbn.js":72}],74:[function(_dereq_,module,exports){
+},{"../../config":51,"../../util.js":121,"../random.js":74,"./jsbn.js":72}],74:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -24198,17 +24198,17 @@ Object.defineProperty(exports, "__esModule", {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-var _mpi = _dereq_('../type/mpi.js');
+var _mpi = require('../type/mpi.js');
 
 var _mpi2 = _interopRequireDefault(_mpi);
 
-var _util = _dereq_('../util.js');
+var _util = require('../util.js');
 
 var _util2 = _interopRequireDefault(_util);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var nodeCrypto = _util2.default.detectNode() && _dereq_('crypto');
+var nodeCrypto = _util2.default.detectNode() && require('crypto');
 
 exports.default = {
   /**
@@ -24372,7 +24372,7 @@ RandomBuffer.prototype.get = function (buf) {
   }
 };
 
-},{"../type/mpi.js":119,"../util.js":121,"crypto":"crypto"}],75:[function(_dereq_,module,exports){
+},{"../type/mpi.js":119,"../util.js":121,"crypto":"crypto"}],75:[function(require,module,exports){
 /**
  * @requires util
  * @requires crypto/hash
@@ -24385,15 +24385,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _util = _dereq_('../util');
+var _util = require('../util');
 
 var _util2 = _interopRequireDefault(_util);
 
-var _public_key = _dereq_('./public_key');
+var _public_key = require('./public_key');
 
 var _public_key2 = _interopRequireDefault(_public_key);
 
-var _pkcs = _dereq_('./pkcs1.js');
+var _pkcs = require('./pkcs1.js');
 
 var _pkcs2 = _interopRequireDefault(_pkcs);
 
@@ -24505,7 +24505,7 @@ exports.default = {
   }
 };
 
-},{"../util":121,"./pkcs1.js":68,"./public_key":71}],76:[function(_dereq_,module,exports){
+},{"../util":121,"./pkcs1.js":68,"./public_key":71}],76:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -24536,15 +24536,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _base = _dereq_('./base64.js');
+var _base = require('./base64.js');
 
 var _base2 = _interopRequireDefault(_base);
 
-var _enums = _dereq_('../enums.js');
+var _enums = require('../enums.js');
 
 var _enums2 = _interopRequireDefault(_enums);
 
-var _config = _dereq_('../config');
+var _config = require('../config');
 
 var _config2 = _interopRequireDefault(_config);
 
@@ -24879,7 +24879,7 @@ exports.default = {
   addheader: addheader
 };
 
-},{"../config":51,"../enums.js":78,"./base64.js":77}],77:[function(_dereq_,module,exports){
+},{"../config":51,"../enums.js":78,"./base64.js":77}],77:[function(require,module,exports){
 /* OpenPGP radix-64/base64 string encoding/decoding
  * Copyright 2005 Herbert Hanewinkel, www.haneWIN.de
  * version 1.0, check www.haneWIN.de for the latest version
@@ -24997,7 +24997,7 @@ exports.default = {
   decode: r2s
 };
 
-},{}],78:[function(_dereq_,module,exports){
+},{}],78:[function(require,module,exports){
 'use strict';
 
 /**
@@ -25329,7 +25329,7 @@ exports.default = {
 
 };
 
-},{}],79:[function(_dereq_,module,exports){
+},{}],79:[function(require,module,exports){
 // OpenPGP.js - An OpenPGP implementation in javascript
 // Copyright (C) 2015 Tankred Hase
 //
@@ -25359,7 +25359,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = HKP;
 
-var _config = _dereq_('./config');
+var _config = require('./config');
 
 var _config2 = _interopRequireDefault(_config);
 
@@ -25373,7 +25373,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 function HKP(keyServerBaseUrl) {
   this._baseUrl = keyServerBaseUrl ? keyServerBaseUrl : _config2.default.keyserver;
-  this._fetch = typeof window !== 'undefined' ? window.fetch : _dereq_('node-fetch');
+  this._fetch = typeof window !== 'undefined' ? window.fetch : require('node-fetch');
 }
 
 /**
@@ -25425,7 +25425,7 @@ HKP.prototype.upload = function (publicKeyArmored) {
   });
 };
 
-},{"./config":51,"node-fetch":"node-fetch"}],80:[function(_dereq_,module,exports){
+},{"./config":51,"node-fetch":"node-fetch"}],80:[function(require,module,exports){
 'use strict';
 
 /**
@@ -25441,7 +25441,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.HKP = exports.AsyncProxy = exports.Keyring = exports.crypto = exports.config = exports.enums = exports.armor = exports.Keyid = exports.S2K = exports.MPI = exports.packet = exports.util = exports.cleartext = exports.message = exports.signature = exports.key = undefined;
 
-var _openpgp = _dereq_('./openpgp');
+var _openpgp = require('./openpgp');
 
 Object.keys(_openpgp).forEach(function (key) {
   if (key === "default") return;
@@ -25453,7 +25453,7 @@ Object.keys(_openpgp).forEach(function (key) {
   });
 });
 
-var _util = _dereq_('./util');
+var _util = require('./util');
 
 Object.defineProperty(exports, 'util', {
   enumerable: true,
@@ -25462,7 +25462,7 @@ Object.defineProperty(exports, 'util', {
   }
 });
 
-var _packet = _dereq_('./packet');
+var _packet = require('./packet');
 
 Object.defineProperty(exports, 'packet', {
   enumerable: true,
@@ -25471,7 +25471,7 @@ Object.defineProperty(exports, 'packet', {
   }
 });
 
-var _mpi = _dereq_('./type/mpi');
+var _mpi = require('./type/mpi');
 
 Object.defineProperty(exports, 'MPI', {
   enumerable: true,
@@ -25480,7 +25480,7 @@ Object.defineProperty(exports, 'MPI', {
   }
 });
 
-var _s2k = _dereq_('./type/s2k');
+var _s2k = require('./type/s2k');
 
 Object.defineProperty(exports, 'S2K', {
   enumerable: true,
@@ -25489,7 +25489,7 @@ Object.defineProperty(exports, 'S2K', {
   }
 });
 
-var _keyid = _dereq_('./type/keyid');
+var _keyid = require('./type/keyid');
 
 Object.defineProperty(exports, 'Keyid', {
   enumerable: true,
@@ -25498,7 +25498,7 @@ Object.defineProperty(exports, 'Keyid', {
   }
 });
 
-var _armor = _dereq_('./encoding/armor');
+var _armor = require('./encoding/armor');
 
 Object.defineProperty(exports, 'armor', {
   enumerable: true,
@@ -25507,7 +25507,7 @@ Object.defineProperty(exports, 'armor', {
   }
 });
 
-var _enums = _dereq_('./enums');
+var _enums = require('./enums');
 
 Object.defineProperty(exports, 'enums', {
   enumerable: true,
@@ -25516,7 +25516,7 @@ Object.defineProperty(exports, 'enums', {
   }
 });
 
-var _config = _dereq_('./config/config');
+var _config = require('./config/config');
 
 Object.defineProperty(exports, 'config', {
   enumerable: true,
@@ -25525,7 +25525,7 @@ Object.defineProperty(exports, 'config', {
   }
 });
 
-var _crypto = _dereq_('./crypto');
+var _crypto = require('./crypto');
 
 Object.defineProperty(exports, 'crypto', {
   enumerable: true,
@@ -25534,7 +25534,7 @@ Object.defineProperty(exports, 'crypto', {
   }
 });
 
-var _keyring = _dereq_('./keyring');
+var _keyring = require('./keyring');
 
 Object.defineProperty(exports, 'Keyring', {
   enumerable: true,
@@ -25543,7 +25543,7 @@ Object.defineProperty(exports, 'Keyring', {
   }
 });
 
-var _async_proxy = _dereq_('./worker/async_proxy');
+var _async_proxy = require('./worker/async_proxy');
 
 Object.defineProperty(exports, 'AsyncProxy', {
   enumerable: true,
@@ -25552,7 +25552,7 @@ Object.defineProperty(exports, 'AsyncProxy', {
   }
 });
 
-var _hkp = _dereq_('./hkp');
+var _hkp = require('./hkp');
 
 Object.defineProperty(exports, 'HKP', {
   enumerable: true,
@@ -25563,19 +25563,19 @@ Object.defineProperty(exports, 'HKP', {
 
 var openpgp = _interopRequireWildcard(_openpgp);
 
-var _key = _dereq_('./key');
+var _key = require('./key');
 
 var keyMod = _interopRequireWildcard(_key);
 
-var _signature = _dereq_('./signature');
+var _signature = require('./signature');
 
 var signatureMod = _interopRequireWildcard(_signature);
 
-var _message = _dereq_('./message');
+var _message = require('./message');
 
 var messageMod = _interopRequireWildcard(_message);
 
-var _cleartext = _dereq_('./cleartext');
+var _cleartext = require('./cleartext');
 
 var cleartextMod = _interopRequireWildcard(_cleartext);
 
@@ -25617,7 +25617,7 @@ var message = exports.message = messageMod;
  * @see module:stream
  * @name module:openpgp.stream
  */
-module.exports.stream = _dereq_('./stream');
+module.exports.stream = require('./stream');
 /**
  * @see module:cleartext
  * @name module:openpgp.cleartext
@@ -25629,7 +25629,7 @@ var cleartext = exports.cleartext = cleartextMod;
  * @name module:openpgp.util
  */
 
-},{"./cleartext":46,"./config/config":50,"./crypto":67,"./encoding/armor":76,"./enums":78,"./hkp":79,"./key":81,"./keyring":82,"./message":85,"./openpgp":86,"./packet":90,"./signature":109,"./stream":115,"./type/keyid":118,"./type/mpi":119,"./type/s2k":120,"./util":121,"./worker/async_proxy":122}],81:[function(_dereq_,module,exports){
+},{"./cleartext":46,"./config/config":50,"./crypto":67,"./encoding/armor":76,"./enums":78,"./hkp":79,"./key":81,"./keyring":82,"./message":85,"./openpgp":86,"./packet":90,"./signature":109,"./stream":115,"./type/keyid":118,"./type/mpi":119,"./type/s2k":120,"./util":121,"./worker/async_proxy":122}],81:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -25666,23 +25666,23 @@ exports.generate = generate;
 exports.reformat = reformat;
 exports.getPreferredSymAlgo = getPreferredSymAlgo;
 
-var _packet = _dereq_('./packet');
+var _packet = require('./packet');
 
 var _packet2 = _interopRequireDefault(_packet);
 
-var _enums = _dereq_('./enums.js');
+var _enums = require('./enums.js');
 
 var _enums2 = _interopRequireDefault(_enums);
 
-var _armor = _dereq_('./encoding/armor.js');
+var _armor = require('./encoding/armor.js');
 
 var _armor2 = _interopRequireDefault(_armor);
 
-var _config = _dereq_('./config');
+var _config = require('./config');
 
 var _config2 = _interopRequireDefault(_config);
 
-var _util = _dereq_('./util');
+var _util = require('./util');
 
 var _util2 = _interopRequireDefault(_util);
 
@@ -26938,7 +26938,7 @@ function getPreferredSymAlgo(keys) {
   return prefAlgo.algo;
 }
 
-},{"./config":51,"./encoding/armor.js":76,"./enums.js":78,"./packet":90,"./util":121}],82:[function(_dereq_,module,exports){
+},{"./config":51,"./encoding/armor.js":76,"./enums.js":78,"./packet":90,"./util":121}],82:[function(require,module,exports){
 'use strict';
 
 /**
@@ -26950,11 +26950,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _keyring = _dereq_('./keyring.js');
+var _keyring = require('./keyring.js');
 
 var _keyring2 = _interopRequireDefault(_keyring);
 
-var _localstore = _dereq_('./localstore.js');
+var _localstore = require('./localstore.js');
 
 var _localstore2 = _interopRequireDefault(_localstore);
 
@@ -26964,7 +26964,7 @@ _keyring2.default.localstore = _localstore2.default;
 
 exports.default = _keyring2.default;
 
-},{"./keyring.js":83,"./localstore.js":84}],83:[function(_dereq_,module,exports){
+},{"./keyring.js":83,"./localstore.js":84}],83:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -26997,11 +26997,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = Keyring;
 
-var _key = _dereq_('../key.js');
+var _key = require('../key.js');
 
 var keyModule = _interopRequireWildcard(_key);
 
-var _localstore = _dereq_('./localstore.js');
+var _localstore = require('./localstore.js');
 
 var _localstore2 = _interopRequireDefault(_localstore);
 
@@ -27201,7 +27201,7 @@ KeyArray.prototype.removeForId = function (keyId) {
   return null;
 };
 
-},{"../key.js":81,"./localstore.js":84}],84:[function(_dereq_,module,exports){
+},{"../key.js":81,"./localstore.js":84}],84:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -27233,15 +27233,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = LocalStore;
 
-var _config = _dereq_('../config');
+var _config = require('../config');
 
 var _config2 = _interopRequireDefault(_config);
 
-var _key = _dereq_('../key.js');
+var _key = require('../key.js');
 
 var keyModule = _interopRequireWildcard(_key);
 
-var _util = _dereq_('../util.js');
+var _util = require('../util.js');
 
 var _util2 = _interopRequireDefault(_util);
 
@@ -27256,7 +27256,7 @@ function LocalStore(prefix) {
   if (typeof window !== 'undefined' && window.localStorage) {
     this.storage = window.localStorage;
   } else {
-    this.storage = new (_dereq_('node-localstorage').LocalStorage)(_config2.default.node_store);
+    this.storage = new (require('node-localstorage').LocalStorage)(_config2.default.node_store);
   }
 }
 
@@ -27329,7 +27329,7 @@ function storeKeys(storage, itemname, keys) {
   }
 }
 
-},{"../config":51,"../key.js":81,"../util.js":121,"node-localstorage":"node-localstorage"}],85:[function(_dereq_,module,exports){
+},{"../config":51,"../key.js":81,"../util.js":121,"node-localstorage":"node-localstorage"}],85:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -27369,35 +27369,35 @@ exports.readSignedContent = readSignedContent;
 exports.fromText = fromText;
 exports.fromBinary = fromBinary;
 
-var _util = _dereq_('./util.js');
+var _util = require('./util.js');
 
 var _util2 = _interopRequireDefault(_util);
 
-var _packet = _dereq_('./packet');
+var _packet = require('./packet');
 
 var _packet2 = _interopRequireDefault(_packet);
 
-var _enums = _dereq_('./enums.js');
+var _enums = require('./enums.js');
 
 var _enums2 = _interopRequireDefault(_enums);
 
-var _armor = _dereq_('./encoding/armor.js');
+var _armor = require('./encoding/armor.js');
 
 var _armor2 = _interopRequireDefault(_armor);
 
-var _config = _dereq_('./config');
+var _config = require('./config');
 
 var _config2 = _interopRequireDefault(_config);
 
-var _crypto = _dereq_('./crypto');
+var _crypto = require('./crypto');
 
 var _crypto2 = _interopRequireDefault(_crypto);
 
-var _signature = _dereq_('./signature.js');
+var _signature = require('./signature.js');
 
 var sigModule = _interopRequireWildcard(_signature);
 
-var _key = _dereq_('./key.js');
+var _key = require('./key.js');
 
 var keyModule = _interopRequireWildcard(_key);
 
@@ -27952,7 +27952,7 @@ function fromBinary(bytes, filename) {
   return new Message(literalDataPacketlist);
 }
 
-},{"./config":51,"./crypto":67,"./encoding/armor.js":76,"./enums.js":78,"./key.js":81,"./packet":90,"./signature.js":109,"./util.js":121}],86:[function(_dereq_,module,exports){
+},{"./config":51,"./crypto":67,"./encoding/armor.js":76,"./enums.js":78,"./key.js":81,"./packet":90,"./signature.js":109,"./util.js":121}],86:[function(require,module,exports){
 // OpenPGP.js - An OpenPGP implementation in javascript
 // Copyright (C) 2016 Tankred Hase
 //
@@ -28003,35 +28003,35 @@ exports.verify = verify;
 exports.encryptSessionKey = encryptSessionKey;
 exports.decryptSessionKey = decryptSessionKey;
 
-var _message = _dereq_('./message.js');
+var _message = require('./message.js');
 
 var messageLib = _interopRequireWildcard(_message);
 
-var _cleartext = _dereq_('./cleartext.js');
+var _cleartext = require('./cleartext.js');
 
 var cleartext = _interopRequireWildcard(_cleartext);
 
-var _key = _dereq_('./key.js');
+var _key = require('./key.js');
 
 var key = _interopRequireWildcard(_key);
 
-var _config = _dereq_('./config/config.js');
+var _config = require('./config/config.js');
 
 var _config2 = _interopRequireDefault(_config);
 
-var _util = _dereq_('./util');
+var _util = require('./util');
 
 var _util2 = _interopRequireDefault(_util);
 
-var _async_proxy = _dereq_('./worker/async_proxy.js');
+var _async_proxy = require('./worker/async_proxy.js');
 
 var _async_proxy2 = _interopRequireDefault(_async_proxy);
 
-var _stream = _dereq_('./stream');
+var _stream = require('./stream');
 
 var _stream2 = _interopRequireDefault(_stream);
 
-var _es6Promise = _dereq_('es6-promise');
+var _es6Promise = require('es6-promise');
 
 var _es6Promise2 = _interopRequireDefault(_es6Promise);
 
@@ -28646,7 +28646,7 @@ function nativeAEAD() {
   return _util2.default.getWebCrypto() && _config2.default.aead_protect;
 }
 
-},{"./cleartext.js":46,"./config/config.js":50,"./key.js":81,"./message.js":85,"./stream":115,"./util":121,"./worker/async_proxy.js":122,"es6-promise":2}],87:[function(_dereq_,module,exports){
+},{"./cleartext.js":46,"./config/config.js":50,"./key.js":81,"./message.js":85,"./stream":115,"./util":121,"./worker/async_proxy.js":122,"es6-promise":2}],87:[function(require,module,exports){
 /**
  * @requires enums
  * @module packet
@@ -28659,7 +28659,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.packet = exports.Trust = exports.Signature = exports.SecretSubkey = exports.Userid = exports.SecretKey = exports.OnePassSignature = exports.UserAttribute = exports.PublicSubkey = exports.Marker = exports.SymmetricallyEncrypted = exports.PublicKey = exports.Literal = exports.SymEncryptedSessionKey = exports.PublicKeyEncryptedSessionKey = exports.SymEncryptedAEADProtected = exports.SymEncryptedIntegrityProtected = exports.Compressed = undefined;
 
-var _compressed = _dereq_('./compressed.js');
+var _compressed = require('./compressed.js');
 
 Object.defineProperty(exports, 'Compressed', {
   enumerable: true,
@@ -28668,7 +28668,7 @@ Object.defineProperty(exports, 'Compressed', {
   }
 });
 
-var _sym_encrypted_integrity_protected = _dereq_('./sym_encrypted_integrity_protected.js');
+var _sym_encrypted_integrity_protected = require('./sym_encrypted_integrity_protected.js');
 
 Object.defineProperty(exports, 'SymEncryptedIntegrityProtected', {
   enumerable: true,
@@ -28677,7 +28677,7 @@ Object.defineProperty(exports, 'SymEncryptedIntegrityProtected', {
   }
 });
 
-var _sym_encrypted_aead_protected = _dereq_('./sym_encrypted_aead_protected.js');
+var _sym_encrypted_aead_protected = require('./sym_encrypted_aead_protected.js');
 
 Object.defineProperty(exports, 'SymEncryptedAEADProtected', {
   enumerable: true,
@@ -28686,7 +28686,7 @@ Object.defineProperty(exports, 'SymEncryptedAEADProtected', {
   }
 });
 
-var _public_key_encrypted_session_key = _dereq_('./public_key_encrypted_session_key.js');
+var _public_key_encrypted_session_key = require('./public_key_encrypted_session_key.js');
 
 Object.defineProperty(exports, 'PublicKeyEncryptedSessionKey', {
   enumerable: true,
@@ -28695,7 +28695,7 @@ Object.defineProperty(exports, 'PublicKeyEncryptedSessionKey', {
   }
 });
 
-var _sym_encrypted_session_key = _dereq_('./sym_encrypted_session_key.js');
+var _sym_encrypted_session_key = require('./sym_encrypted_session_key.js');
 
 Object.defineProperty(exports, 'SymEncryptedSessionKey', {
   enumerable: true,
@@ -28704,7 +28704,7 @@ Object.defineProperty(exports, 'SymEncryptedSessionKey', {
   }
 });
 
-var _literal = _dereq_('./literal.js');
+var _literal = require('./literal.js');
 
 Object.defineProperty(exports, 'Literal', {
   enumerable: true,
@@ -28713,7 +28713,7 @@ Object.defineProperty(exports, 'Literal', {
   }
 });
 
-var _public_key = _dereq_('./public_key.js');
+var _public_key = require('./public_key.js');
 
 Object.defineProperty(exports, 'PublicKey', {
   enumerable: true,
@@ -28722,7 +28722,7 @@ Object.defineProperty(exports, 'PublicKey', {
   }
 });
 
-var _symmetrically_encrypted = _dereq_('./symmetrically_encrypted.js');
+var _symmetrically_encrypted = require('./symmetrically_encrypted.js');
 
 Object.defineProperty(exports, 'SymmetricallyEncrypted', {
   enumerable: true,
@@ -28731,7 +28731,7 @@ Object.defineProperty(exports, 'SymmetricallyEncrypted', {
   }
 });
 
-var _marker = _dereq_('./marker.js');
+var _marker = require('./marker.js');
 
 Object.defineProperty(exports, 'Marker', {
   enumerable: true,
@@ -28740,7 +28740,7 @@ Object.defineProperty(exports, 'Marker', {
   }
 });
 
-var _public_subkey = _dereq_('./public_subkey.js');
+var _public_subkey = require('./public_subkey.js');
 
 Object.defineProperty(exports, 'PublicSubkey', {
   enumerable: true,
@@ -28749,7 +28749,7 @@ Object.defineProperty(exports, 'PublicSubkey', {
   }
 });
 
-var _user_attribute = _dereq_('./user_attribute.js');
+var _user_attribute = require('./user_attribute.js');
 
 Object.defineProperty(exports, 'UserAttribute', {
   enumerable: true,
@@ -28758,7 +28758,7 @@ Object.defineProperty(exports, 'UserAttribute', {
   }
 });
 
-var _one_pass_signature = _dereq_('./one_pass_signature.js');
+var _one_pass_signature = require('./one_pass_signature.js');
 
 Object.defineProperty(exports, 'OnePassSignature', {
   enumerable: true,
@@ -28767,7 +28767,7 @@ Object.defineProperty(exports, 'OnePassSignature', {
   }
 });
 
-var _secret_key = _dereq_('./secret_key.js');
+var _secret_key = require('./secret_key.js');
 
 Object.defineProperty(exports, 'SecretKey', {
   enumerable: true,
@@ -28776,7 +28776,7 @@ Object.defineProperty(exports, 'SecretKey', {
   }
 });
 
-var _userid = _dereq_('./userid.js');
+var _userid = require('./userid.js');
 
 Object.defineProperty(exports, 'Userid', {
   enumerable: true,
@@ -28785,7 +28785,7 @@ Object.defineProperty(exports, 'Userid', {
   }
 });
 
-var _secret_subkey = _dereq_('./secret_subkey.js');
+var _secret_subkey = require('./secret_subkey.js');
 
 Object.defineProperty(exports, 'SecretSubkey', {
   enumerable: true,
@@ -28794,7 +28794,7 @@ Object.defineProperty(exports, 'SecretSubkey', {
   }
 });
 
-var _signature = _dereq_('./signature.js');
+var _signature = require('./signature.js');
 
 Object.defineProperty(exports, 'Signature', {
   enumerable: true,
@@ -28803,7 +28803,7 @@ Object.defineProperty(exports, 'Signature', {
   }
 });
 
-var _trust = _dereq_('./trust.js');
+var _trust = require('./trust.js');
 
 Object.defineProperty(exports, 'Trust', {
   enumerable: true,
@@ -28812,7 +28812,7 @@ Object.defineProperty(exports, 'Trust', {
   }
 });
 
-var _packet = _dereq_('./packet.js');
+var _packet = require('./packet.js');
 
 Object.defineProperty(exports, 'packet', {
   enumerable: true,
@@ -28823,11 +28823,11 @@ Object.defineProperty(exports, 'packet', {
 exports.newPacketFromTag = newPacketFromTag;
 exports.fromStructuredClone = fromStructuredClone;
 
-var _enums = _dereq_('../enums.js');
+var _enums = require('../enums.js');
 
 var _enums2 = _interopRequireDefault(_enums);
 
-var _all_packets = _dereq_('./all_packets.js');
+var _all_packets = require('./all_packets.js');
 
 var packets = _interopRequireWildcard(_all_packets);
 
@@ -28873,7 +28873,7 @@ function packetClassFromTagName(tag) {
   return tag.substr(0, 1).toUpperCase() + tag.substr(1);
 }
 
-},{"../enums.js":78,"./all_packets.js":87,"./compressed.js":89,"./literal.js":91,"./marker.js":92,"./one_pass_signature.js":93,"./packet.js":94,"./public_key.js":96,"./public_key_encrypted_session_key.js":97,"./public_subkey.js":98,"./secret_key.js":99,"./secret_subkey.js":100,"./signature.js":101,"./sym_encrypted_aead_protected.js":102,"./sym_encrypted_integrity_protected.js":103,"./sym_encrypted_session_key.js":104,"./symmetrically_encrypted.js":105,"./trust.js":106,"./user_attribute.js":107,"./userid.js":108}],88:[function(_dereq_,module,exports){
+},{"../enums.js":78,"./all_packets.js":87,"./compressed.js":89,"./literal.js":91,"./marker.js":92,"./one_pass_signature.js":93,"./packet.js":94,"./public_key.js":96,"./public_key_encrypted_session_key.js":97,"./public_subkey.js":98,"./secret_key.js":99,"./secret_subkey.js":100,"./signature.js":101,"./sym_encrypted_aead_protected.js":102,"./sym_encrypted_integrity_protected.js":103,"./sym_encrypted_session_key.js":104,"./symmetrically_encrypted.js":105,"./trust.js":106,"./user_attribute.js":107,"./userid.js":108}],88:[function(require,module,exports){
 // OpenPGP.js - An OpenPGP implementation in javascript
 // Copyright (C) 2015 Tankred Hase
 //
@@ -28905,27 +28905,27 @@ Object.defineProperty(exports, "__esModule", {
 exports.clonePackets = clonePackets;
 exports.parseClonedPackets = parseClonedPackets;
 
-var _key = _dereq_('../key.js');
+var _key = require('../key.js');
 
 var key = _interopRequireWildcard(_key);
 
-var _message = _dereq_('../message.js');
+var _message = require('../message.js');
 
 var message = _interopRequireWildcard(_message);
 
-var _cleartext = _dereq_('../cleartext.js');
+var _cleartext = require('../cleartext.js');
 
 var cleartext = _interopRequireWildcard(_cleartext);
 
-var _signature = _dereq_('../signature.js');
+var _signature = require('../signature.js');
 
 var signature = _interopRequireWildcard(_signature);
 
-var _packetlist = _dereq_('./packetlist.js');
+var _packetlist = require('./packetlist.js');
 
 var _packetlist2 = _interopRequireDefault(_packetlist);
 
-var _keyid = _dereq_('../type/keyid.js');
+var _keyid = require('../type/keyid.js');
 
 var _keyid2 = _interopRequireDefault(_keyid);
 
@@ -29056,7 +29056,7 @@ function packetlistCloneToSignature(clone) {
   return new signature.Signature(packetlist);
 }
 
-},{"../cleartext.js":46,"../key.js":81,"../message.js":85,"../signature.js":109,"../type/keyid.js":118,"./packetlist.js":95}],89:[function(_dereq_,module,exports){
+},{"../cleartext.js":46,"../key.js":81,"../message.js":85,"../signature.js":109,"../type/keyid.js":118,"./packetlist.js":95}],89:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -29095,23 +29095,23 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = Compressed;
 
-var _enums = _dereq_('../enums.js');
+var _enums = require('../enums.js');
 
 var _enums2 = _interopRequireDefault(_enums);
 
-var _util = _dereq_('../util.js');
+var _util = require('../util.js');
 
 var _util2 = _interopRequireDefault(_util);
 
-var _zlibMin = _dereq_('../compression/zlib.min.js');
+var _zlibMin = require('../compression/zlib.min.js');
 
 var _zlibMin2 = _interopRequireDefault(_zlibMin);
 
-var _rawinflateMin = _dereq_('../compression/rawinflate.min.js');
+var _rawinflateMin = require('../compression/rawinflate.min.js');
 
 var _rawinflateMin2 = _interopRequireDefault(_rawinflateMin);
 
-var _rawdeflateMin = _dereq_('../compression/rawdeflate.min.js');
+var _rawdeflateMin = require('../compression/rawdeflate.min.js');
 
 var _rawdeflateMin2 = _interopRequireDefault(_rawdeflateMin);
 
@@ -29239,26 +29239,26 @@ Compressed.prototype.compress = function () {
   }
 };
 
-},{"../compression/rawdeflate.min.js":47,"../compression/rawinflate.min.js":48,"../compression/zlib.min.js":49,"../enums.js":78,"../util.js":121}],90:[function(_dereq_,module,exports){
+},{"../compression/rawdeflate.min.js":47,"../compression/rawinflate.min.js":48,"../compression/zlib.min.js":49,"../enums.js":78,"../util.js":121}],90:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _all_packets = _dereq_('./all_packets.js');
+var _all_packets = require('./all_packets.js');
 
 var packets = _interopRequireWildcard(_all_packets);
 
-var _clone = _dereq_('./clone.js');
+var _clone = require('./clone.js');
 
 var clone = _interopRequireWildcard(_clone);
 
-var _packetlist = _dereq_('./packetlist.js');
+var _packetlist = require('./packetlist.js');
 
 var _packetlist2 = _interopRequireDefault(_packetlist);
 
-var _packet = _dereq_('./packet.js');
+var _packet = require('./packet.js');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29279,7 +29279,7 @@ for (var i in packets) {
 
 exports.default = mod;
 
-},{"./all_packets.js":87,"./clone.js":88,"./packet.js":94,"./packetlist.js":95}],91:[function(_dereq_,module,exports){
+},{"./all_packets.js":87,"./clone.js":88,"./packet.js":94,"./packetlist.js":95}],91:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -29314,11 +29314,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = Literal;
 
-var _util = _dereq_('../util.js');
+var _util = require('../util.js');
 
 var _util2 = _interopRequireDefault(_util);
 
-var _enums = _dereq_('../enums.js');
+var _enums = require('../enums.js');
 
 var _enums2 = _interopRequireDefault(_enums);
 
@@ -29429,7 +29429,7 @@ Literal.prototype.write = function () {
   return _util2.default.concatUint8Array([format, filename_length, filename, date, data]);
 };
 
-},{"../enums.js":78,"../util.js":121}],92:[function(_dereq_,module,exports){
+},{"../enums.js":78,"../util.js":121}],92:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -29467,7 +29467,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = Marker;
 
-var _enums = _dereq_('../enums.js');
+var _enums = require('../enums.js');
 
 var _enums2 = _interopRequireDefault(_enums);
 
@@ -29502,7 +29502,7 @@ Marker.prototype.read = function (bytes) {
   return false;
 };
 
-},{"../enums.js":78}],93:[function(_dereq_,module,exports){
+},{"../enums.js":78}],93:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -29541,15 +29541,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = OnePassSignature;
 
-var _util = _dereq_('../util.js');
+var _util = require('../util.js');
 
 var _util2 = _interopRequireDefault(_util);
 
-var _enums = _dereq_('../enums.js');
+var _enums = require('../enums.js');
 
 var _enums2 = _interopRequireDefault(_enums);
 
-var _keyid = _dereq_('../type/keyid.js');
+var _keyid = require('../type/keyid.js');
 
 var _keyid2 = _interopRequireDefault(_keyid);
 
@@ -29621,7 +29621,7 @@ OnePassSignature.prototype.postCloneTypeFix = function () {
   this.signingKeyId = _keyid2.default.fromClone(this.signingKeyId);
 };
 
-},{"../enums.js":78,"../type/keyid.js":118,"../util.js":121}],94:[function(_dereq_,module,exports){
+},{"../enums.js":78,"../type/keyid.js":118,"../util.js":121}],94:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -29650,7 +29650,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _util = _dereq_('../util.js');
+var _util = require('../util.js');
 
 var _util2 = _interopRequireDefault(_util);
 
@@ -29892,7 +29892,7 @@ exports.default = {
   }
 };
 
-},{"../util.js":121}],95:[function(_dereq_,module,exports){
+},{"../util.js":121}],95:[function(require,module,exports){
 /**
  * This class represents a list of openpgp packets.
  * Take care when iterating over it - the packets themselves
@@ -29911,23 +29911,23 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = Packetlist;
 
-var _util = _dereq_('../util');
+var _util = require('../util');
 
 var _util2 = _interopRequireDefault(_util);
 
-var _packet = _dereq_('./packet.js');
+var _packet = require('./packet.js');
 
 var _packet2 = _interopRequireDefault(_packet);
 
-var _all_packets = _dereq_('./all_packets.js');
+var _all_packets = require('./all_packets.js');
 
 var packets = _interopRequireWildcard(_all_packets);
 
-var _enums = _dereq_('../enums.js');
+var _enums = require('../enums.js');
 
 var _enums2 = _interopRequireDefault(_enums);
 
-var _config = _dereq_('../config');
+var _config = require('../config');
 
 var _config2 = _interopRequireDefault(_config);
 
@@ -30152,7 +30152,7 @@ Packetlist.fromStructuredClone = function (packetlistClone) {
   return packetlist;
 };
 
-},{"../config":51,"../enums.js":78,"../util":121,"./all_packets.js":87,"./packet.js":94}],96:[function(_dereq_,module,exports){
+},{"../config":51,"../enums.js":78,"../util":121,"./all_packets.js":87,"./packet.js":94}],96:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -30192,23 +30192,23 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = PublicKey;
 
-var _util = _dereq_('../util.js');
+var _util = require('../util.js');
 
 var _util2 = _interopRequireDefault(_util);
 
-var _mpi = _dereq_('../type/mpi.js');
+var _mpi = require('../type/mpi.js');
 
 var _mpi2 = _interopRequireDefault(_mpi);
 
-var _keyid = _dereq_('../type/keyid.js');
+var _keyid = require('../type/keyid.js');
 
 var _keyid2 = _interopRequireDefault(_keyid);
 
-var _enums = _dereq_('../enums.js');
+var _enums = require('../enums.js');
 
 var _enums2 = _interopRequireDefault(_enums);
 
-var _crypto = _dereq_('../crypto');
+var _crypto = require('../crypto');
 
 var _crypto2 = _interopRequireDefault(_crypto);
 
@@ -30399,7 +30399,7 @@ PublicKey.prototype.postCloneTypeFix = function () {
   }
 };
 
-},{"../crypto":67,"../enums.js":78,"../type/keyid.js":118,"../type/mpi.js":119,"../util.js":121}],97:[function(_dereq_,module,exports){
+},{"../crypto":67,"../enums.js":78,"../type/keyid.js":118,"../type/mpi.js":119,"../util.js":121}],97:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -30446,23 +30446,23 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = PublicKeyEncryptedSessionKey;
 
-var _keyid = _dereq_('../type/keyid.js');
+var _keyid = require('../type/keyid.js');
 
 var _keyid2 = _interopRequireDefault(_keyid);
 
-var _util = _dereq_('../util.js');
+var _util = require('../util.js');
 
 var _util2 = _interopRequireDefault(_util);
 
-var _mpi = _dereq_('../type/mpi.js');
+var _mpi = require('../type/mpi.js');
 
 var _mpi2 = _interopRequireDefault(_mpi);
 
-var _enums = _dereq_('../enums.js');
+var _enums = require('../enums.js');
 
 var _enums2 = _interopRequireDefault(_enums);
 
-var _crypto = _dereq_('../crypto');
+var _crypto = require('../crypto');
 
 var _crypto2 = _interopRequireDefault(_crypto);
 
@@ -30589,7 +30589,7 @@ PublicKeyEncryptedSessionKey.prototype.postCloneTypeFix = function () {
   }
 };
 
-},{"../crypto":67,"../enums.js":78,"../type/keyid.js":118,"../type/mpi.js":119,"../util.js":121}],98:[function(_dereq_,module,exports){
+},{"../crypto":67,"../enums.js":78,"../type/keyid.js":118,"../type/mpi.js":119,"../util.js":121}],98:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -30620,11 +30620,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = PublicSubkey;
 
-var _public_key = _dereq_('./public_key.js');
+var _public_key = require('./public_key.js');
 
 var _public_key2 = _interopRequireDefault(_public_key);
 
-var _enums = _dereq_('../enums.js');
+var _enums = require('../enums.js');
 
 var _enums2 = _interopRequireDefault(_enums);
 
@@ -30642,7 +30642,7 @@ function PublicSubkey() {
 PublicSubkey.prototype = new _public_key2.default();
 PublicSubkey.prototype.constructor = PublicSubkey;
 
-},{"../enums.js":78,"./public_key.js":96}],99:[function(_dereq_,module,exports){
+},{"../enums.js":78,"./public_key.js":96}],99:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -30683,27 +30683,27 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = SecretKey;
 
-var _public_key = _dereq_('./public_key.js');
+var _public_key = require('./public_key.js');
 
 var _public_key2 = _interopRequireDefault(_public_key);
 
-var _enums = _dereq_('../enums.js');
+var _enums = require('../enums.js');
 
 var _enums2 = _interopRequireDefault(_enums);
 
-var _util = _dereq_('../util.js');
+var _util = require('../util.js');
 
 var _util2 = _interopRequireDefault(_util);
 
-var _crypto = _dereq_('../crypto');
+var _crypto = require('../crypto');
 
 var _crypto2 = _interopRequireDefault(_crypto);
 
-var _mpi = _dereq_('../type/mpi.js');
+var _mpi = require('../type/mpi.js');
 
 var _mpi2 = _interopRequireDefault(_mpi);
 
-var _s2k = _dereq_('../type/s2k.js');
+var _s2k = require('../type/s2k.js');
 
 var _s2k2 = _interopRequireDefault(_s2k);
 
@@ -30951,7 +30951,7 @@ SecretKey.prototype.clearPrivateMPIs = function () {
   this.isDecrypted = false;
 };
 
-},{"../crypto":67,"../enums.js":78,"../type/mpi.js":119,"../type/s2k.js":120,"../util.js":121,"./public_key.js":96}],100:[function(_dereq_,module,exports){
+},{"../crypto":67,"../enums.js":78,"../type/mpi.js":119,"../type/s2k.js":120,"../util.js":121,"./public_key.js":96}],100:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -30982,11 +30982,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = SecretSubkey;
 
-var _secret_key = _dereq_('./secret_key.js');
+var _secret_key = require('./secret_key.js');
 
 var _secret_key2 = _interopRequireDefault(_secret_key);
 
-var _enums = _dereq_('../enums.js');
+var _enums = require('../enums.js');
 
 var _enums2 = _interopRequireDefault(_enums);
 
@@ -31004,7 +31004,7 @@ function SecretSubkey() {
 SecretSubkey.prototype = new _secret_key2.default();
 SecretSubkey.prototype.constructor = SecretSubkey;
 
-},{"../enums.js":78,"./secret_key.js":99}],101:[function(_dereq_,module,exports){
+},{"../enums.js":78,"./secret_key.js":99}],101:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -31045,27 +31045,27 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = Signature;
 
-var _util = _dereq_('../util.js');
+var _util = require('../util.js');
 
 var _util2 = _interopRequireDefault(_util);
 
-var _packet = _dereq_('./packet.js');
+var _packet = require('./packet.js');
 
 var _packet2 = _interopRequireDefault(_packet);
 
-var _enums = _dereq_('../enums.js');
+var _enums = require('../enums.js');
 
 var _enums2 = _interopRequireDefault(_enums);
 
-var _crypto = _dereq_('../crypto');
+var _crypto = require('../crypto');
 
 var _crypto2 = _interopRequireDefault(_crypto);
 
-var _mpi = _dereq_('../type/mpi.js');
+var _mpi = require('../type/mpi.js');
 
 var _mpi2 = _interopRequireDefault(_mpi);
 
-var _keyid = _dereq_('../type/keyid.js');
+var _keyid = require('../type/keyid.js');
 
 var _keyid2 = _interopRequireDefault(_keyid);
 
@@ -31707,7 +31707,7 @@ Signature.prototype.postCloneTypeFix = function () {
   this.issuerKeyId = _keyid2.default.fromClone(this.issuerKeyId);
 };
 
-},{"../crypto":67,"../enums.js":78,"../type/keyid.js":118,"../type/mpi.js":119,"../util.js":121,"./packet.js":94}],102:[function(_dereq_,module,exports){
+},{"../crypto":67,"../enums.js":78,"../type/keyid.js":118,"../type/mpi.js":119,"../util.js":121,"./packet.js":94}],102:[function(require,module,exports){
 // OpenPGP.js - An OpenPGP implementation in javascript
 // Copyright (C) 2016 Tankred Hase
 //
@@ -31737,15 +31737,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = SymEncryptedAEADProtected;
 
-var _util = _dereq_('../util.js');
+var _util = require('../util.js');
 
 var _util2 = _interopRequireDefault(_util);
 
-var _crypto = _dereq_('../crypto');
+var _crypto = require('../crypto');
 
 var _crypto2 = _interopRequireDefault(_crypto);
 
-var _enums = _dereq_('../enums.js');
+var _enums = require('../enums.js');
 
 var _enums2 = _interopRequireDefault(_enums);
 
@@ -31817,7 +31817,7 @@ SymEncryptedAEADProtected.prototype.encrypt = function (sessionKeyAlgorithm, key
   });
 };
 
-},{"../crypto":67,"../enums.js":78,"../util.js":121}],103:[function(_dereq_,module,exports){
+},{"../crypto":67,"../enums.js":78,"../util.js":121}],103:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -31859,19 +31859,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = SymEncryptedIntegrityProtected;
 
-var _util = _dereq_('../util.js');
+var _util = require('../util.js');
 
 var _util2 = _interopRequireDefault(_util);
 
-var _crypto = _dereq_('../crypto');
+var _crypto = require('../crypto');
 
 var _crypto2 = _interopRequireDefault(_crypto);
 
-var _enums = _dereq_('../enums.js');
+var _enums = require('../enums.js');
 
 var _enums2 = _interopRequireDefault(_enums);
 
-var _asmcryptoLite = _dereq_('asmcrypto-lite');
+var _asmcryptoLite = require('asmcrypto-lite');
 
 var _asmcryptoLite2 = _interopRequireDefault(_asmcryptoLite);
 
@@ -32021,7 +32021,7 @@ function nodeDecrypt(algo, ct, key) {
   return new Uint8Array(pt);
 }
 
-},{"../crypto":67,"../enums.js":78,"../util.js":121,"asmcrypto-lite":1}],104:[function(_dereq_,module,exports){
+},{"../crypto":67,"../enums.js":78,"../util.js":121,"asmcrypto-lite":1}],104:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -32067,19 +32067,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = SymEncryptedSessionKey;
 
-var _util = _dereq_('../util.js');
+var _util = require('../util.js');
 
 var _util2 = _interopRequireDefault(_util);
 
-var _s2k = _dereq_('../type/s2k.js');
+var _s2k = require('../type/s2k.js');
 
 var _s2k2 = _interopRequireDefault(_s2k);
 
-var _enums = _dereq_('../enums.js');
+var _enums = require('../enums.js');
 
 var _enums2 = _interopRequireDefault(_enums);
 
-var _crypto = _dereq_('../crypto');
+var _crypto = require('../crypto');
 
 var _crypto2 = _interopRequireDefault(_crypto);
 
@@ -32190,7 +32190,7 @@ SymEncryptedSessionKey.prototype.postCloneTypeFix = function () {
   this.s2k = _s2k2.default.fromClone(this.s2k);
 };
 
-},{"../crypto":67,"../enums.js":78,"../type/s2k.js":120,"../util.js":121}],105:[function(_dereq_,module,exports){
+},{"../crypto":67,"../enums.js":78,"../type/s2k.js":120,"../util.js":121}],105:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -32228,15 +32228,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = SymmetricallyEncrypted;
 
-var _crypto = _dereq_('../crypto');
+var _crypto = require('../crypto');
 
 var _crypto2 = _interopRequireDefault(_crypto);
 
-var _enums = _dereq_('../enums.js');
+var _enums = require('../enums.js');
 
 var _enums2 = _interopRequireDefault(_enums);
 
-var _config = _dereq_('../config');
+var _config = require('../config');
 
 var _config2 = _interopRequireDefault(_config);
 
@@ -32290,7 +32290,7 @@ SymmetricallyEncrypted.prototype.encrypt = function (algo, key) {
   return Promise.resolve();
 };
 
-},{"../config":51,"../crypto":67,"../enums.js":78}],106:[function(_dereq_,module,exports){
+},{"../config":51,"../crypto":67,"../enums.js":78}],106:[function(require,module,exports){
 /**
  * @requires enums
  * @module packet/trust
@@ -32303,7 +32303,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = Trust;
 
-var _enums = _dereq_('../enums.js');
+var _enums = require('../enums.js');
 
 var _enums2 = _interopRequireDefault(_enums);
 
@@ -32323,7 +32323,7 @@ function Trust() {
  */
 Trust.prototype.read = function () {};
 
-},{"../enums.js":78}],107:[function(_dereq_,module,exports){
+},{"../enums.js":78}],107:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -32369,15 +32369,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = UserAttribute;
 
-var _util = _dereq_('../util.js');
+var _util = require('../util.js');
 
 var _util2 = _interopRequireDefault(_util);
 
-var _packet = _dereq_('./packet.js');
+var _packet = require('./packet.js');
 
 var _packet2 = _interopRequireDefault(_packet);
 
-var _enums = _dereq_('../enums.js');
+var _enums = require('../enums.js');
 
 var _enums2 = _interopRequireDefault(_enums);
 
@@ -32433,7 +32433,7 @@ UserAttribute.prototype.equals = function (usrAttr) {
   });
 };
 
-},{"../enums.js":78,"../util.js":121,"./packet.js":94}],108:[function(_dereq_,module,exports){
+},{"../enums.js":78,"../util.js":121,"./packet.js":94}],108:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -32471,11 +32471,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = Userid;
 
-var _util = _dereq_('../util.js');
+var _util = require('../util.js');
 
 var _util2 = _interopRequireDefault(_util);
 
-var _enums = _dereq_('../enums.js');
+var _enums = require('../enums.js');
 
 var _enums2 = _interopRequireDefault(_enums);
 
@@ -32509,7 +32509,7 @@ Userid.prototype.write = function () {
   return _util2.default.str2Uint8Array(_util2.default.encode_utf8(this.userid));
 };
 
-},{"../enums.js":78,"../util.js":121}],109:[function(_dereq_,module,exports){
+},{"../enums.js":78,"../util.js":121}],109:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -32545,15 +32545,15 @@ exports.Signature = Signature;
 exports.readArmored = readArmored;
 exports.read = read;
 
-var _packet = _dereq_('./packet');
+var _packet = require('./packet');
 
 var _packet2 = _interopRequireDefault(_packet);
 
-var _enums = _dereq_('./enums.js');
+var _enums = require('./enums.js');
 
 var _enums2 = _interopRequireDefault(_enums);
 
-var _armor = _dereq_('./encoding/armor.js');
+var _armor = require('./encoding/armor.js');
 
 var _armor2 = _interopRequireDefault(_armor);
 
@@ -32603,7 +32603,7 @@ function read(input) {
   return new Signature(packetlist);
 }
 
-},{"./encoding/armor.js":76,"./enums.js":78,"./packet":90}],110:[function(_dereq_,module,exports){
+},{"./encoding/armor.js":76,"./enums.js":78,"./packet":90}],110:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -32611,23 +32611,23 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = ArmorStream;
 
-var _header = _dereq_('./header.js');
+var _header = require('./header.js');
 
 var _header2 = _interopRequireDefault(_header);
 
-var _armor = _dereq_('../encoding/armor.js');
+var _armor = require('../encoding/armor.js');
 
 var _armor2 = _interopRequireDefault(_armor);
 
-var _base = _dereq_('../encoding/base64.js');
+var _base = require('../encoding/base64.js');
 
 var _base2 = _interopRequireDefault(_base);
 
-var _util2 = _dereq_('util');
+var _util2 = require('util');
 
 var _util3 = _interopRequireDefault(_util2);
 
-var _util4 = _dereq_('../util.js');
+var _util4 = require('../util.js');
 
 var _util5 = _interopRequireDefault(_util4);
 
@@ -32706,7 +32706,7 @@ ArmorStream.prototype.getCheckSum = function () {
   return '=' + _base2.default.encode(Buffer.from(str, 'binary'));
 };
 
-},{"../encoding/armor.js":76,"../encoding/base64.js":77,"../util.js":121,"./header.js":114,"util":44}],111:[function(_dereq_,module,exports){
+},{"../encoding/armor.js":76,"../encoding/base64.js":77,"../util.js":121,"./header.js":114,"util":44}],111:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -32714,19 +32714,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = ChunkedStream;
 
-var _packet = _dereq_('../packet');
+var _packet = require('../packet');
 
 var _packet2 = _interopRequireDefault(_packet);
 
-var _header = _dereq_('./header.js');
+var _header = require('./header.js');
 
 var _header2 = _interopRequireDefault(_header);
 
-var _util2 = _dereq_('util');
+var _util2 = require('util');
 
 var _util3 = _interopRequireDefault(_util2);
 
-var _util4 = _dereq_('../util.js');
+var _util4 = require('../util.js');
 
 var _util5 = _interopRequireDefault(_util4);
 
@@ -32774,20 +32774,20 @@ ChunkedStream.prototype._flush = function (callback) {
   callback();
 };
 
-},{"../packet":90,"../util.js":121,"./header.js":114,"util":44}],112:[function(_dereq_,module,exports){
+},{"../packet":90,"../util.js":121,"./header.js":114,"util":44}],112:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _stream = _dereq_('stream');
+var _stream = require('stream');
 
-var _util2 = _dereq_('util');
+var _util2 = require('util');
 
 var _util3 = _interopRequireDefault(_util2);
 
-var _util4 = _dereq_('../util.js');
+var _util4 = require('../util.js');
 
 var _util5 = _interopRequireDefault(_util4);
 
@@ -32979,7 +32979,7 @@ CipherFeedbackStream.prototype._flush = function (cb) {
   cb();
 };
 
-},{"../util.js":121,"stream":41,"util":44}],113:[function(_dereq_,module,exports){
+},{"../util.js":121,"stream":41,"util":44}],113:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -32987,31 +32987,31 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = CompressionStream;
 
-var _header = _dereq_('./header.js');
+var _header = require('./header.js');
 
 var _header2 = _interopRequireDefault(_header);
 
-var _chunked = _dereq_('./chunked.js');
+var _chunked = require('./chunked.js');
 
 var _chunked2 = _interopRequireDefault(_chunked);
 
-var _packet = _dereq_('../packet');
+var _packet = require('../packet');
 
 var _packet2 = _interopRequireDefault(_packet);
 
-var _enums = _dereq_('../enums');
+var _enums = require('../enums');
 
 var _enums2 = _interopRequireDefault(_enums);
 
-var _zlib = _dereq_('zlib');
+var _zlib = require('zlib');
 
 var _zlib2 = _interopRequireDefault(_zlib);
 
-var _util2 = _dereq_('util');
+var _util2 = require('util');
 
 var _util3 = _interopRequireDefault(_util2);
 
-var _util4 = _dereq_('../util.js');
+var _util4 = require('../util.js');
 
 var _util5 = _interopRequireDefault(_util4);
 
@@ -33072,7 +33072,7 @@ CompressionStream.prototype._flush = function (callback) {
   this.zip.end();
 };
 
-},{"../enums":78,"../packet":90,"../util.js":121,"./chunked.js":111,"./header.js":114,"util":44,"zlib":17}],114:[function(_dereq_,module,exports){
+},{"../enums":78,"../packet":90,"../util.js":121,"./chunked.js":111,"./header.js":114,"util":44,"zlib":17}],114:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -33080,9 +33080,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = HeaderPacketStream;
 
-var _stream = _dereq_('stream');
+var _stream = require('stream');
 
-var _util = _dereq_('util');
+var _util = require('util');
 
 var _util2 = _interopRequireDefault(_util);
 
@@ -33107,7 +33107,7 @@ HeaderPacketStream.prototype._transform = function () {
   }
 };
 
-},{"stream":41,"util":44}],115:[function(_dereq_,module,exports){
+},{"stream":41,"util":44}],115:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -33115,15 +33115,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.HeaderPacketStream = exports.CipherFeedbackStream = exports.MessageStream = undefined;
 
-var _message = _dereq_('./message');
+var _message = require('./message');
 
 var _message2 = _interopRequireDefault(_message);
 
-var _cipher = _dereq_('./cipher');
+var _cipher = require('./cipher');
 
 var _cipher2 = _interopRequireDefault(_cipher);
 
-var _header = _dereq_('./header');
+var _header = require('./header');
 
 var _header2 = _interopRequireDefault(_header);
 
@@ -33133,7 +33133,7 @@ exports.MessageStream = _message2.default;
 exports.CipherFeedbackStream = _cipher2.default;
 exports.HeaderPacketStream = _header2.default;
 
-},{"./cipher":112,"./header":114,"./message":116}],116:[function(_dereq_,module,exports){
+},{"./cipher":112,"./header":114,"./message":116}],116:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -33141,55 +33141,55 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = MessageStream;
 
-var _util2 = _dereq_('../util.js');
+var _util2 = require('../util.js');
 
 var _util3 = _interopRequireDefault(_util2);
 
-var _header = _dereq_('./header');
+var _header = require('./header');
 
 var _header2 = _interopRequireDefault(_header);
 
-var _cipher = _dereq_('./cipher');
+var _cipher = require('./cipher');
 
 var _cipher2 = _interopRequireDefault(_cipher);
 
-var _packet = _dereq_('../packet');
+var _packet = require('../packet');
 
 var _packet2 = _interopRequireDefault(_packet);
 
-var _enums = _dereq_('../enums');
+var _enums = require('../enums');
 
 var _enums2 = _interopRequireDefault(_enums);
 
-var _config = _dereq_('../config');
+var _config = require('../config');
 
 var _config2 = _interopRequireDefault(_config);
 
-var _crypto = _dereq_('../crypto');
+var _crypto = require('../crypto');
 
 var _crypto2 = _interopRequireDefault(_crypto);
 
-var _armor = _dereq_('./armor');
+var _armor = require('./armor');
 
 var _armor2 = _interopRequireDefault(_armor);
 
-var _signature = _dereq_('./signature');
+var _signature = require('./signature');
 
 var _signature2 = _interopRequireDefault(_signature);
 
-var _key = _dereq_('../key.js');
+var _key = require('../key.js');
 
 var keyModule = _interopRequireWildcard(_key);
 
-var _chunked = _dereq_('./chunked.js');
+var _chunked = require('./chunked.js');
 
 var _chunked2 = _interopRequireDefault(_chunked);
 
-var _compression = _dereq_('./compression.js');
+var _compression = require('./compression.js');
 
 var _compression2 = _interopRequireDefault(_compression);
 
-var _util4 = _dereq_('util');
+var _util4 = require('util');
 
 var _util5 = _interopRequireDefault(_util4);
 
@@ -33385,7 +33385,7 @@ MessageStream.prototype._flush = function (cb) {
   this.literalPacket.end();
 };
 
-},{"../config":51,"../crypto":67,"../enums":78,"../key.js":81,"../packet":90,"../util.js":121,"./armor":110,"./chunked.js":111,"./cipher":112,"./compression.js":113,"./header":114,"./signature":117,"util":44}],117:[function(_dereq_,module,exports){
+},{"../config":51,"../crypto":67,"../enums":78,"../key.js":81,"../packet":90,"../util.js":121,"./armor":110,"./chunked.js":111,"./cipher":112,"./compression.js":113,"./header":114,"./signature":117,"util":44}],117:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -33394,23 +33394,23 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _enums = _dereq_('../enums.js');
+var _enums = require('../enums.js');
 
 var _enums2 = _interopRequireDefault(_enums);
 
-var _crypto = _dereq_('../crypto');
+var _crypto = require('../crypto');
 
 var _crypto2 = _interopRequireDefault(_crypto);
 
-var _config = _dereq_('../config');
+var _config = require('../config');
 
 var _config2 = _interopRequireDefault(_config);
 
-var _packet = _dereq_('../packet');
+var _packet = require('../packet');
 
 var _packet2 = _interopRequireDefault(_packet);
 
-var _util2 = _dereq_('../util');
+var _util2 = require('../util');
 
 var _util3 = _interopRequireDefault(_util2);
 
@@ -33492,7 +33492,7 @@ var Signature = function () {
 
 exports.default = Signature;
 
-},{"../config":51,"../crypto":67,"../enums.js":78,"../packet":90,"../util":121}],118:[function(_dereq_,module,exports){
+},{"../config":51,"../crypto":67,"../enums.js":78,"../packet":90,"../util":121}],118:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -33528,7 +33528,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = Keyid;
 
-var _util = _dereq_('../util.js');
+var _util = require('../util.js');
 
 var _util2 = _interopRequireDefault(_util);
 
@@ -33581,7 +33581,7 @@ Keyid.fromId = function (hex) {
   return keyid;
 };
 
-},{"../util.js":121}],119:[function(_dereq_,module,exports){
+},{"../util.js":121}],119:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -33625,11 +33625,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = MPI;
 
-var _jsbn = _dereq_('../crypto/public_key/jsbn.js');
+var _jsbn = require('../crypto/public_key/jsbn.js');
 
 var _jsbn2 = _interopRequireDefault(_jsbn);
 
-var _util = _dereq_('../util.js');
+var _util = require('../util.js');
 
 var _util2 = _interopRequireDefault(_util);
 
@@ -33712,7 +33712,7 @@ MPI.fromClone = function (clone) {
   return mpi;
 };
 
-},{"../crypto/public_key/jsbn.js":72,"../util.js":121}],120:[function(_dereq_,module,exports){
+},{"../crypto/public_key/jsbn.js":72,"../util.js":121}],120:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -33751,15 +33751,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = S2K;
 
-var _enums = _dereq_('../enums.js');
+var _enums = require('../enums.js');
 
 var _enums2 = _interopRequireDefault(_enums);
 
-var _util = _dereq_('../util.js');
+var _util = require('../util.js');
 
 var _util2 = _interopRequireDefault(_util);
 
-var _crypto = _dereq_('../crypto');
+var _crypto = require('../crypto');
 
 var _crypto2 = _interopRequireDefault(_crypto);
 
@@ -33936,7 +33936,7 @@ S2K.fromClone = function (clone) {
   return s2k;
 };
 
-},{"../crypto":67,"../enums.js":78,"../util.js":121}],121:[function(_dereq_,module,exports){
+},{"../crypto":67,"../enums.js":78,"../util.js":121}],121:[function(require,module,exports){
 (function (Buffer){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
@@ -33967,7 +33967,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _config = _dereq_('./config');
+var _config = require('./config');
 
 var _config2 = _interopRequireDefault(_config);
 
@@ -34498,7 +34498,7 @@ exports.default = {
       return;
     }
 
-    return _dereq_('crypto');
+    return require('crypto');
   },
 
   /**
@@ -34511,13 +34511,13 @@ exports.default = {
       return Buffer;
     }
 
-    return _dereq_('buffer').Buffer;
+    return require('buffer').Buffer;
   }
 
 };
 
-}).call(this,_dereq_("buffer").Buffer)
-},{"./config":51,"buffer":18,"crypto":"crypto"}],122:[function(_dereq_,module,exports){
+}).call(this,require("buffer").Buffer)
+},{"./config":51,"buffer":18,"crypto":"crypto"}],122:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -34542,15 +34542,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = AsyncProxy;
 
-var _util = _dereq_('../util.js');
+var _util = require('../util.js');
 
 var _util2 = _interopRequireDefault(_util);
 
-var _crypto = _dereq_('../crypto');
+var _crypto = require('../crypto');
 
 var _crypto2 = _interopRequireDefault(_crypto);
 
-var _packet = _dereq_('../packet');
+var _packet = require('../packet');
 
 var _packet2 = _interopRequireDefault(_packet);
 
