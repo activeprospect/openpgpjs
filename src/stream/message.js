@@ -13,6 +13,7 @@ import * as keyModule from '../key.js';
 import ChunkedStream from './chunked.js';
 import CompressionStream from './compression.js';
 import util from 'util';
+import nodeCrypto from 'crypto';
 
 const Buffer = _util.getNativeBuffer();
 
@@ -33,12 +34,13 @@ export default function MessageStream(keys, opts) {
   opts.prefixrandom = Buffer.from(crypto.getPrefixRandom(opts.algo));
   opts.cipherType = 'binary';
 
+  let prefix;
   if (config.integrity_protect) {
     var prefixrandom = opts.prefixrandom;
     const repeat = Buffer.from([prefixrandom[prefixrandom.length - 2], prefixrandom[prefixrandom.length - 1]]);
-    const prefix = Buffer.concat([prefixrandom, repeat]);
+    prefix = Buffer.concat([prefixrandom, repeat]);
     opts.resync = false;
-    this.hash = crypto.hash.forge_sha1.create();
+    this.hash = nodeCrypto.createHash('sha1');
     this.hash.update(prefix);
   }
 
@@ -77,7 +79,7 @@ export default function MessageStream(keys, opts) {
   if (opts.compression) {
     this.compressionPacket = new CompressionStream({ algorithm: enums.write(enums.compression, opts.compression === true ? 'zip' : opts.compression) });
     this.compressionPacket.on('data', function(data) {
-      self.cipher.write(data);
+      self.cipher.write(Buffer.from(data));
     });
     this.dataPacket = this.compressionPacket;
     this.literalPacket.on('data', function(data) {
@@ -88,7 +90,7 @@ export default function MessageStream(keys, opts) {
     });
   } else {
     this.literalPacket.on('data', function(data) {
-      self.cipher.write(data);
+      self.cipher.write(Buffer.from(data));
     });
     this.dataPacket = this.literalPacket;
   }
@@ -103,8 +105,10 @@ export default function MessageStream(keys, opts) {
       } else {
         chunk = Buffer.from(data, 'binary');
       }
-      self.hash.update(chunk);
-      _cipherwrite(data);
+      if (!self.ended) {
+        self.hash.update(chunk);
+      }
+      _cipherwrite(chunk);
     };
   }
 
@@ -172,7 +176,7 @@ MessageStream.prototype.getHeader = function() {
     // some strange hack to add a marker packet so modification detection
     // doesn't fail
     var write = this.compressionPacket ? this.compressionPacket.write.bind(this.compressionPacket) : this.cipher.write.bind(this.cipher);
-    write(Buffer.concat([Buffer.from(packet.packet.writeHeader(enums.packet.marker, 3), 'binary'), Buffer.from('PGP','binary')]));
+    //write(Buffer.from(packet.packet.writeHeader(enums.packet.marker, 0), 'binary'));
     write(this.signature.onePassSignaturePackets());
   }
 
@@ -203,7 +207,7 @@ MessageStream.prototype._flush = function(cb) {
       var mdc_header = Buffer.from([0xD3, 0x14]);
       self.hash.update(mdc_header);
       var hash_digest = self.hash.digest();
-
+      self.ended = true;
       self.cipher.write(Buffer.concat([mdc_header, Buffer.from(hash_digest)]));
     }
     self.cipher.end();

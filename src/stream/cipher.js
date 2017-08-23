@@ -3,6 +3,8 @@
 import { Transform } from 'stream';
 import util from 'util';
 import _util from '../util.js';
+//import packet from '../packet';
+//import enums from '../enums';
 
 const Buffer = _util.getNativeBuffer();
 
@@ -29,8 +31,7 @@ function CipherFeedbackStream(opts) {
   this._previousCiphertext = Buffer.alloc(0);
   this._previousChunk = Buffer.alloc(0);
 
-  this._buffer = Buffer.alloc(this.blockSize);
-  this._offset = 0;
+  this._buffer = Buffer.alloc(0);
 
 }
 
@@ -98,7 +99,7 @@ CipherFeedbackStream.prototype._encryptFirstBlock = function(chunk) {
     ciphertext[block_size + 2 + i] = this.feedbackRegisterEncrypted[i + offset] ^ chunk[i];
   }
   this._previousCiphertext = ciphertext.slice(block_size + 2 - offset, 2*block_size + 2 - offset);
-  this._previousChunk = Buffer.from(chunk);
+  this._previousChunk = chunk;
   ciphertext = ciphertext.slice(0, chunk.length + 2 + block_size - offset);
   return ciphertext;
 };
@@ -130,7 +131,7 @@ CipherFeedbackStream.prototype._encryptBlock = function(chunk) {
       }
       ciphertext[begin + i] = this.feedbackRegisterEncrypted[i] ^ byte;
     }
-    this._previousCiphertext = ciphertext.slice(0, chunkLength);
+    this._previousCiphertext = ciphertext.slice(0, block_size);
   }
   this._previousChunk = chunk;
   if (this._eof) {
@@ -153,38 +154,24 @@ CipherFeedbackStream.prototype.encryptBlock = function(chunk) {
 };
 
 CipherFeedbackStream.prototype._transform = function(chunk, encoding, cb) {
-  var availableIn = chunk && chunk.length || 0;
-  if (availableIn + this._offset + 1 < this.blockSize) {
-    chunk.copy(this._buffer, this._offset);
-    this._offset += availableIn;
-  } else {
-    var block = this._buffer.slice(0, this._offset);
-    var needed = this.blockSize - block.length;
-    var chunkOffset = 0;
-    if (needed === 0) {
-      var encrypted = this.encryptBlock(block);
-      this.push(encrypted);
-    }
-    while (availableIn > needed && needed > 0) {
-      block = Buffer.concat([block,
-                            chunk.slice(chunkOffset, chunkOffset + needed)]);
-      chunkOffset += needed;
+  chunk = Buffer.from(chunk, encoding);
+  var block, offset = 0;
+  this._buffer = Buffer.concat([this._buffer, chunk]);
+  if (this._buffer.length >= this.blockSize) {
+    while (this._buffer.length >= offset + this.blockSize) {
+      block = this._buffer.slice(offset, offset + this.blockSize);
       this.push(this.encryptBlock(block));
-      availableIn -= needed;
-      needed = this.blockSize;
-      block = Buffer.alloc(0);
+      offset += this.blockSize;
     }
-    this._offset = availableIn;
-    chunk.slice(chunkOffset).copy(this._buffer);
+    this._buffer = this._buffer.slice(offset);
   }
   this.emit('encrypted', chunk);
   cb();
 };
 
 CipherFeedbackStream.prototype._flush = function(cb) {
-  var block = this._buffer.slice(0, this._offset);
   this._eof = true;
-  this.push(this.encryptBlock(block));
+  this.push(this.encryptBlock(this._buffer));
   this.emit('flushed', null);
   cb();
 };
