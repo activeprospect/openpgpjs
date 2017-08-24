@@ -14850,7 +14850,7 @@ exports.default = {
   tolerant: true, // ignore unsupported/unrecognizable packets instead of throwing an error
   show_version: true,
   show_comment: true,
-  versionstring: "OpenPGP.js v2.6.8-rc.3",
+  versionstring: "OpenPGP.js v2.6.8-rc.4",
   commentstring: "https://openpgpjs.org",
   keyserver: "https://keyserver.ubuntu.com",
   node_store: './openpgp.store'
@@ -31299,10 +31299,9 @@ function MessageStream(_ref) {
   var privateKeys = _ref.privateKeys;
   var passwords = _ref.passwords;
   var filename = _ref.filename;
+  var compression = _ref.compression;
   var _ref$armor = _ref.armor;
   var armor = _ref$armor === undefined ? true : _ref$armor;
-  var _ref$compression = _ref.compression;
-  var compression = _ref$compression === undefined ? 'uncompressed' : _ref$compression;
   var _ref$detached = _ref.detached;
   var detached = _ref$detached === undefined ? false : _ref$detached;
   var _ref$signature = _ref.signature;
@@ -31362,7 +31361,7 @@ function MessageStream(_ref) {
     }
   });
 
-  if (compression) {
+  if (compression && compression !== 'uncompressed') {
     this.compressionPacket = new _compression2.default({ algorithm: _enums2.default.write(_enums2.default.compression, compression === true ? 'zip' : compression) });
     this.compressionPacket.on('data', function (data) {
       self.cipher.write(Buffer.from(data));
