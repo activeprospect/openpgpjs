@@ -14850,7 +14850,7 @@ exports.default = {
   tolerant: true, // ignore unsupported/unrecognizable packets instead of throwing an error
   show_version: true,
   show_comment: true,
-  versionstring: "OpenPGP.js v2.6.8-rc.1",
+  versionstring: "OpenPGP.js v2.6.8-rc.2",
   commentstring: "https://openpgpjs.org",
   keyserver: "https://keyserver.ubuntu.com",
   node_store: './openpgp.store'
@@ -32112,7 +32112,7 @@ exports.default = {
   },
 
   isReadableStream: function isReadableStream(data) {
-    return data && (typeof data === 'undefined' ? 'undefined' : _typeof(data)) === 'object' && typeof data.pipe === 'function' && data.readable !== false && typeof data._read === 'function' && _typeof(data._readableState) === 'object';
+    return data && (typeof data === 'undefined' ? 'undefined' : _typeof(data)) === 'object' && typeof data.pipe === 'function';
   },
 
   isEmailAddress: function isEmailAddress(data) {
