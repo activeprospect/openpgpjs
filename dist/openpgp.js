@@ -14850,7 +14850,7 @@ exports.default = {
   tolerant: true, // ignore unsupported/unrecognizable packets instead of throwing an error
   show_version: true,
   show_comment: true,
-  versionstring: "OpenPGP.js v2.6.8-rc.2",
+  versionstring: "OpenPGP.js v2.6.8-rc.3",
   commentstring: "https://openpgpjs.org",
   keyserver: "https://keyserver.ubuntu.com",
   node_store: './openpgp.store'
@@ -31302,7 +31302,7 @@ function MessageStream(_ref) {
   var _ref$armor = _ref.armor;
   var armor = _ref$armor === undefined ? true : _ref$armor;
   var _ref$compression = _ref.compression;
-  var compression = _ref$compression === undefined ? 'zip' : _ref$compression;
+  var compression = _ref$compression === undefined ? 'uncompressed' : _ref$compression;
   var _ref$detached = _ref.detached;
   var detached = _ref$detached === undefined ? false : _ref$detached;
   var _ref$signature = _ref.signature;
