@@ -20274,16 +20274,22 @@ exports.default = {
 /** @see module:crypto/public_key/dsa */
 
 },{"./dsa.js":65,"./elgamal.js":66,"./rsa.js":69}],68:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = BigInteger;
 
-var _util = require("../../util.js");
+var _util2 = require('../../util.js');
 
-var _util2 = _interopRequireDefault(_util);
+var _util3 = _interopRequireDefault(_util2);
+
+var _util4 = require('util');
+
+var _util5 = _interopRequireDefault(_util4);
+
+var _events = require('events');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20293,6 +20299,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var dbits;
 
 // JavaScript engine analysis
+/*jshint eqeqeq: false, curly:false, -W041, -W009 */
 /*
  * Copyright (c) 2003-2005  Tom Wu (tjw@cs.Stanford.EDU)
  * All Rights Reserved.
@@ -20332,13 +20339,33 @@ var dbits;
  */
 
 var canary = 0xdeadbeefcafe;
-var j_lm = (canary & 0xffffff) == 0xefcafe;
+var j_lm = (canary & 0xffffff) === 0xefcafe;
 
 // (public) Constructor
 
-function BigInteger(a, b, c) {
-  if (a != null) if ("number" == typeof a) this.fromNumber(a, b, c);else if (b == null && "string" != typeof a) this.fromString(a, 256);else this.fromString(a, b);
+function BigInteger(a, b, c, isAsync) {
+  var _this = this;
+
+  _events.EventEmitter.call(this);
+  if (a != null) {
+    if ("number" === typeof a) {
+      if (isAsync) {
+        this.async = true;
+        this.fromNumber(a, b, c).then(function () {
+          _this.emit('ready');
+        });
+      } else {
+        this.fromNumber(a, b, c);
+      }
+    } else if (b == null && "string" !== typeof a) {
+      this.fromString(a, 256);
+    } else {
+      this.fromString(a, b);
+    }
+  }
 }
+
+_util5.default.inherits(BigInteger, _events.EventEmitter);
 
 // return new, unset BigInteger
 
@@ -20421,18 +20448,22 @@ BigInteger.prototype.F2 = 2 * dbits - BI_FP;
 
 // Digit conversions
 var BI_RM = "0123456789abcdefghijklmnopqrstuvwxyz";
-var BI_RC = new Array();
+var BI_RC = [];
 var rr, vv;
 rr = "0".charCodeAt(0);
 for (vv = 0; vv <= 9; ++vv) {
   BI_RC[rr++] = vv;
-}rr = "a".charCodeAt(0);
+}
+rr = "a".charCodeAt(0);
 for (vv = 10; vv < 36; ++vv) {
   BI_RC[rr++] = vv;
-}rr = "A".charCodeAt(0);
+}
+rr = "A".charCodeAt(0);
 for (vv = 10; vv < 36; ++vv) {
   BI_RC[rr++] = vv;
-}function int2char(n) {
+}
+
+function int2char(n) {
   return BI_RM.charAt(n);
 }
 
@@ -20446,7 +20477,8 @@ function intAt(s, i) {
 function bnpCopyTo(r) {
   for (var i = this.t - 1; i >= 0; --i) {
     r[i] = this[i];
-  }r.t = this.t;
+  }
+  r.t = this.t;
   r.s = this.s;
 }
 
@@ -20563,7 +20595,7 @@ function bnAbs() {
 // (public) return + if this > a, - if this < a, 0 if equal
 
 function bnCompareTo(a) {
-  var _this = this;
+  var _this2 = this;
 
   var r = this.s - a.s;
   if (r != 0) return this.async ? Promise.resolve(r) : r;
@@ -20578,7 +20610,7 @@ function bnCompareTo(a) {
       var loop = function loop() {
         i--;
         if (i >= 0) {
-          if ((r = _this[i] - a[i]) != 0) {
+          if ((r = _this2[i] - a[i]) != 0) {
             resolve(r);
           } else {
             setTimeout(loop, 0);
@@ -21170,16 +21202,43 @@ function bnpFromRadix(s, b) {
 // (protected) alternate constructor
 
 function bnpFromNumber(a, b, c) {
+  var _this3 = this;
+
   if ("number" == typeof b) {
     // new BigInteger(int,int,RNG)
-    if (a < 2) this.fromInt(1);else {
-      this.fromNumber(a, c);
-      if (!this.testBit(a - 1)) // force MSB set
-        this.bitwiseTo(BigInteger.ONE.shiftLeft(a - 1), op_or, this);
-      if (this.isEven()) this.dAddOffset(1, 0); // force odd
-      while (!this.isProbablePrime(b)) {
-        this.dAddOffset(2, 0);
-        if (this.bitLength() > a) this.subTo(BigInteger.ONE.shiftLeft(a - 1), this);
+    if (a < 2) {
+      var v = this.fromInt(1);
+      return this.async ? Promise.resolve(v) : v;
+    } else {
+      if (this.async) {
+        return new Promise(function (resolve) {
+          _this3.fromNumber(a, c).then(function () {
+            if (!_this3.testBit(a - 1)) // force MSB set
+              _this3.bitwiseTo(BigInteger.ONE.shiftLeft(a - 1), op_or, _this3);
+            if (_this3.isEven()) _this3.dAddOffset(1, 0); // force odd
+            var loop = function loop() {
+              _this3.isProbablePrime(b).then(function (r) {
+                if (!r) {
+                  _this3.dAddOffset(2, 0);
+                  if (_this3.bitLength() > a) _this3.subTo(BigInteger.ONE.shiftLeft(a - 1), _this3);
+                  setTimeout(loop, 0);
+                } else {
+                  resolve(_this3);
+                }
+              });
+            };
+            loop();
+          });
+        });
+      } else {
+        this.fromNumber(a, c);
+        if (!this.testBit(a - 1)) // force MSB set
+          this.bitwiseTo(BigInteger.ONE.shiftLeft(a - 1), op_or, this);
+        if (this.isEven()) this.dAddOffset(1, 0); // force odd
+        while (!this.isProbablePrime(b)) {
+          this.dAddOffset(2, 0);
+          if (this.bitLength() > a) this.subTo(BigInteger.ONE.shiftLeft(a - 1), this);
+        }
       }
     }
   } else {
@@ -21189,7 +21248,8 @@ function bnpFromNumber(a, b, c) {
     x.length = (a >> 3) + 1;
     b.nextBytes(x);
     if (t > 0) x[0] &= (1 << t) - 1;else x[0] = 0;
-    this.fromString(x, 256);
+    var _v = this.fromString(x, 256);
+    return this.async ? Promise.resolve(_v) : _v;
   }
 }
 
@@ -21660,11 +21720,13 @@ Barrett.prototype.sqrTo = barrettSqrTo;
 // (public) this^e % m (HAC 14.85)
 
 function bnModPow(e, m) {
+  var _this4 = this;
+
   var i = e.bitLength(),
       k,
       r = nbv(1),
       z;
-  if (i <= 0) return r;else if (i < 18) k = 1;else if (i < 48) k = 3;else if (i < 144) k = 4;else if (i < 768) k = 5;else k = 6;
+  if (i <= 0) return this.async ? Promise.resolve(r) : r;else if (i < 18) k = 1;else if (i < 48) k = 3;else if (i < 144) k = 4;else if (i < 768) k = 5;else k = 6;
   if (i < 8) z = new Classic(m);else if (m.isEven()) z = new Barrett(m);else z = new Montgomery(m);
 
   // precomputation
@@ -21689,10 +21751,11 @@ function bnModPow(e, m) {
       r2 = nbi(),
       t;
   i = nbits(e[j]) - 1;
-  while (j >= 0) {
+
+  var fn = function fn() {
     if (i >= k1) w = e[j] >> i - k1 & km;else {
       w = (e[j] & (1 << i + 1) - 1) << k1 - i;
-      if (j > 0) w |= e[j - 1] >> this.DB + i - k1;
+      if (j > 0) w |= e[j - 1] >> _this4.DB + i - k1;
     }
 
     n = k;
@@ -21701,7 +21764,7 @@ function bnModPow(e, m) {
       --n;
     }
     if ((i -= n) < 0) {
-      i += this.DB;
+      i += _this4.DB;
       --j;
     }
     if (is1) {
@@ -21728,12 +21791,29 @@ function bnModPow(e, m) {
       r = r2;
       r2 = t;
       if (--i < 0) {
-        i = this.DB - 1;
+        i = _this4.DB - 1;
         --j;
       }
     }
+  };
+  if (this.async) {
+    return new Promise(function (resolve) {
+      var loop = function loop() {
+        if (j >= 0) {
+          fn();
+          setTimeout(loop, 0);
+        } else {
+          resolve(z.revert(r));
+        }
+      };
+      loop();
+    });
+  } else {
+    while (j >= 0) {
+      fn();
+    }
+    return z.revert(r);
   }
-  return z.revert(r);
 }
 
 // (public) gcd(this,a) (HAC 14.54)
@@ -21868,14 +21948,20 @@ var lplim = (1 << 26) / lowprimes[lowprimes.length - 1];
 // (public) test primality with certainty >= 1-.5^t
 
 function bnIsProbablePrime(t) {
+  var _this5 = this;
+
   var i,
       x = this.abs();
+  x.async = this.async;
+  var result = function result(r) {
+    return _this5.async ? Promise.resolve(r) : r;
+  };
   if (x.t == 1 && x[0] <= lowprimes[lowprimes.length - 1]) {
     for (i = 0; i < lowprimes.length; ++i) {
-      if (x[0] == lowprimes[i]) return true;
-    }return false;
+      if (x[0] == lowprimes[i]) return result(true);
+    }return result(false);
   }
-  if (x.isEven()) return false;
+  if (x.isEven()) return result(false);
   i = 1;
   while (i < lowprimes.length) {
     var m = lowprimes[i],
@@ -21884,7 +21970,7 @@ function bnIsProbablePrime(t) {
       m *= lowprimes[j++];
     }m = x.modInt(m);
     while (i < j) {
-      if (m % lowprimes[i++] == 0) return false;
+      if (m % lowprimes[i++] == 0) return result(false);
     }
   }
   return x.millerRabin(t);
@@ -21924,41 +22010,81 @@ function bnToMPI() {
   var result = "";
   result += String.fromCharCode((size & 0xFF00) >> 8);
   result += String.fromCharCode(size & 0xFF);
-  result += _util2.default.bin2str(ba);
+  result += _util3.default.bin2str(ba);
   return result;
 }
 /* END of addition */
 
 // (protected) true if probably prime (HAC 4.24, Miller-Rabin)
 function bnpMillerRabin(t) {
+  var _this6 = this;
+
   var n1 = this.subtract(BigInteger.ONE);
   var k = n1.getLowestSetBit();
-  if (k <= 0) return false;
+  if (k <= 0) return this.async ? Promise.resolve(false) : false;
   var r = n1.shiftRight(k);
   t = t + 1 >> 1;
   if (t > lowprimes.length) t = lowprimes.length;
   var a = nbi();
   var j,
       bases = [];
-  for (var i = 0; i < t; ++i) {
-    //Pick bases at random, instead of starting at 2
-    for (;;) {
-      j = lowprimes[Math.floor(Math.random() * lowprimes.length)];
-      if (bases.indexOf(j) == -1) break;
-    }
-    bases.push(j);
-    a.fromInt(j);
-    var y = a.modPow(r, this);
-    if (y.compareTo(BigInteger.ONE) != 0 && y.compareTo(n1) != 0) {
-      var j = 1;
-      while (j++ < k && y.compareTo(n1) != 0) {
-        y = y.modPowInt(2, this);
-        if (y.compareTo(BigInteger.ONE) == 0) return false;
+  if (this.async) {
+    return new Promise(function (resolve) {
+      var i = 0;
+      var fn = function fn(done) {
+        //Pick bases at random, instead of starting at 2
+        for (;;) {
+          j = lowprimes[Math.floor(Math.random() * lowprimes.length)];
+          if (bases.indexOf(j) == -1) break;
+        }
+        bases.push(j);
+        a.fromInt(j);
+        a.async = true;
+        a.modPow(r, _this6).then(function (y) {
+          if (y.compareTo(BigInteger.ONE) != 0 && y.compareTo(n1) != 0) {
+            var j = 1;
+            while (j++ < k && y.compareTo(n1) != 0) {
+              y = y.modPowInt(2, _this6);
+              if (y.compareTo(BigInteger.ONE) == 0) return resolve(false);
+            }
+            if (y.compareTo(n1) != 0) return resolve(false);
+          }
+          done();
+        });
+      };
+      var loop = function loop() {
+        if (i < t) {
+          fn(function () {
+            return setTimeout(loop, 0);
+          });
+          i++;
+        } else {
+          resolve(true);
+        }
+      };
+      loop();
+    });
+  } else {
+    for (var i = 0; i < t; t++) {
+      //Pick bases at random, instead of starting at 2
+      for (;;) {
+        j = lowprimes[Math.floor(Math.random() * lowprimes.length)];
+        if (bases.indexOf(j) == -1) break;
       }
-      if (y.compareTo(n1) != 0) return false;
+      bases.push(j);
+      a.fromInt(j);
+      var y = a.modPow(r, this);
+      if (y.compareTo(BigInteger.ONE) != 0 && y.compareTo(n1) != 0) {
+        var j = 1;
+        while (j++ < k && y.compareTo(n1) != 0) {
+          y = y.modPowInt(2, this);
+          if (y.compareTo(BigInteger.ONE) == 0) return false;
+        }
+        if (y.compareTo(n1) != 0) return false;
+      }
     }
+    return true;
   }
-  return true;
 }
 
 // protected
@@ -22015,7 +22141,7 @@ BigInteger.prototype.toMPI = bnToMPI;
 // JSBN-specific extension
 BigInteger.prototype.square = bnSquare;
 
-},{"../../util.js":117}],69:[function(require,module,exports){
+},{"../../util.js":117,"events":18,"util":40}],69:[function(require,module,exports){
 // GPG4Browsers - An OpenPGP implementation in javascript
 // Copyright (C) 2011 Recurity Labs GmbH
 //
@@ -22264,28 +22390,35 @@ function RSA() {
       key.ee = new _jsbn2.default(E, 16);
 
       var determineP = function determineP() {
-        key.p = new _jsbn2.default(B - qs, 1, rng);
-        key.p.async = true;
-        key.p.subtract(_jsbn2.default.ONE).gcd(key.ee).then(function (y) {
-          y.compareTo(_jsbn2.default.ONE).then(function (r) {
-            if (r === 0 && key.p.isProbablePrime(10)) {
-              determineQ();
-            } else {
-              setTimeout(determineP, 0);
-            }
+        console.log('starting to determine p');
+        key.p = new _jsbn2.default(B - qs, 1, rng, true);
+        console.log('big int started');
+        key.p.on('ready', function () {
+          console.log('p key is ready');
+          key.p.async = true;
+          key.p.subtract(_jsbn2.default.ONE).gcd(key.ee).then(function (y) {
+            y.compareTo(_jsbn2.default.ONE).then(function (r) {
+              if (r === 0 && key.p.isProbablePrime(10)) {
+                determineQ();
+              } else {
+                setTimeout(determineP, 0);
+              }
+            });
           });
         });
       };
       var determineQ = function determineQ() {
-        key.q = new _jsbn2.default(qs, 1, rng);
-        key.q.async = true;
-        key.q.subtract(_jsbn2.default.ONE).gcd(key.ee).then(function (y) {
-          y.compareTo(_jsbn2.default.ONE).then(function (r) {
-            if (r === 0 && key.q.isProbablePrime(10)) {
-              finalize();
-            } else {
-              setTimeout(determineQ, 0);
-            }
+        key.q = new _jsbn2.default(qs, 1, rng, true);
+        key.q.on('ready', function () {
+          key.q.async = true;
+          key.q.subtract(_jsbn2.default.ONE).gcd(key.ee).then(function (y) {
+            y.compareTo(_jsbn2.default.ONE).then(function (r) {
+              if (r === 0 && key.q.isProbablePrime(10)) {
+                finalize();
+              } else {
+                setTimeout(determineQ, 0);
+              }
+            });
           });
         });
       };
