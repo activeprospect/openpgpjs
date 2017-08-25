@@ -227,28 +227,32 @@ export default function RSA() {
       key.ee = new BigInteger(E, 16);
 
       var determineP = function() {
-        key.p = new BigInteger(B - qs, 1, rng);
-        key.p.async = true;
-        key.p.subtract(BigInteger.ONE).gcd(key.ee).then(function(y) {
-          y.compareTo(BigInteger.ONE).then(function(r) {
-            if (r === 0 && key.p.isProbablePrime(10)) {
-              determineQ();
-            } else {
-              setTimeout(determineP, 0);
-            }
+        key.p = new BigInteger(B - qs, 1, rng, true);
+        key.p.on('ready', () => {
+          key.p.async = true;
+          key.p.subtract(BigInteger.ONE).gcd(key.ee).then(function(y) {
+            y.compareTo(BigInteger.ONE).then(function(r) {
+              if (r === 0 && key.p.isProbablePrime(10)) {
+                determineQ();
+              } else {
+                setTimeout(determineP, 0);
+              }
+            });
           });
         });
       };
       var determineQ = function() {
-        key.q = new BigInteger(qs, 1, rng);
-        key.q.async = true;
-        key.q.subtract(BigInteger.ONE).gcd(key.ee).then(function(y) {
-          y.compareTo(BigInteger.ONE).then(function(r) {
-            if (r === 0 && key.q.isProbablePrime(10)) {
-              finalize();
-            } else {
-              setTimeout(determineQ, 0);
-            }
+        key.q = new BigInteger(qs, 1, rng, true);
+        key.q.on('ready', () => {
+          key.q.async = true;
+          key.q.subtract(BigInteger.ONE).gcd(key.ee).then(function(y) {
+            y.compareTo(BigInteger.ONE).then(function(r) {
+              if (r === 0 && key.q.isProbablePrime(10)) {
+                finalize();
+              } else {
+                setTimeout(determineQ, 0);
+              }
+            });
           });
         });
       };
