@@ -21446,6 +21446,7 @@ function bnAdd(a) {
 function bnSubtract(a) {
   var r = nbi();
   this.subTo(a, r);
+  r.async = this.async;
   return r;
 }
 
@@ -21730,7 +21731,7 @@ function bnGCD(a) {
     x.rShiftTo(g, x);
     y.rShiftTo(g, y);
   }
-  while (x.signum() > 0) {
+  var fn = function fn() {
     if ((i = x.getLowestSetBit()) > 0) x.rShiftTo(i, x);
     if ((i = y.getLowestSetBit()) > 0) y.rShiftTo(i, y);
     if (x.compareTo(y) >= 0) {
@@ -21740,9 +21741,28 @@ function bnGCD(a) {
       y.subTo(x, y);
       y.rShiftTo(1, y);
     }
+  };
+  console.log(this);
+  if (this.async) {
+    return new Promise(function (resolve) {
+      var loop = function loop() {
+        if (x.signum() > 0) {
+          fn();
+          setTimeout(loop, 0);
+        } else {
+          if (g > 0) y.lShiftTo(g, y);
+          return resolve(y);
+        }
+      };
+      loop();
+    });
+  } else {
+    while (x.signum() > 0) {
+      fn();
+    }
+    if (g > 0) y.lShiftTo(g, y);
+    return y;
   }
-  if (g > 0) y.lShiftTo(g, y);
-  return y;
 }
 
 // (protected) this % n, n < 2^26
@@ -22209,19 +22229,25 @@ function RSA() {
 
       var determineP = function determineP() {
         key.p = new _jsbn2.default(B - qs, 1, rng);
-        if (key.p.subtract(_jsbn2.default.ONE).gcd(key.ee).compareTo(_jsbn2.default.ONE) === 0 && key.p.isProbablePrime(10)) {
-          determineQ();
-        } else {
-          setTimeout(determineP, 0);
-        }
+        key.p.async = true;
+        key.p.subtract(_jsbn2.default.ONE).gcd(key.ee).then(function (y) {
+          if (y.compareTo(_jsbn2.default.ONE) === 0 && key.p.isProbablePrime(10)) {
+            determineQ();
+          } else {
+            setTimeout(determineP, 0);
+          }
+        });
       };
       var determineQ = function determineQ() {
         key.q = new _jsbn2.default(qs, 1, rng);
-        if (key.q.subtract(_jsbn2.default.ONE).gcd(key.ee).compareTo(_jsbn2.default.ONE) === 0 && key.q.isProbablePrime(10)) {
-          finalize();
-        } else {
-          setTimeout(determineQ, 0);
-        }
+        key.q.async = true;
+        key.q.subtract(_jsbn2.default.ONE).gcd(key.ee).then(function (y) {
+          if (y.compareTo(_jsbn2.default.ONE) === 0 && key.q.isProbablePrime(10)) {
+            finalize();
+          } else {
+            setTimeout(determineQ, 0);
+          }
+        });
       };
 
       var finalize = function finalize() {

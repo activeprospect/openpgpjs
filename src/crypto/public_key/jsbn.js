@@ -1184,6 +1184,7 @@ function bnAdd(a) {
 function bnSubtract(a) {
   var r = nbi();
   this.subTo(a, r);
+  r.async = this.async;
   return r;
 }
 
@@ -1471,7 +1472,7 @@ function bnGCD(a) {
     x.rShiftTo(g, x);
     y.rShiftTo(g, y);
   }
-  while (x.signum() > 0) {
+  var fn = function() {
     if ((i = x.getLowestSetBit()) > 0) x.rShiftTo(i, x);
     if ((i = y.getLowestSetBit()) > 0) y.rShiftTo(i, y);
     if (x.compareTo(y) >= 0) {
@@ -1481,9 +1482,27 @@ function bnGCD(a) {
       y.subTo(x, y);
       y.rShiftTo(1, y);
     }
+  };
+  if (this.async) {
+    return new Promise(function(resolve) {
+      var loop = function() {
+        if (x.signum() > 0) {
+          fn();
+          setTimeout(loop, 0);
+        } else {
+          if (g > 0) y.lShiftTo(g, y);
+          return resolve(y);
+        }
+      };
+      loop();
+    });
+  } else {
+    while (x.signum() > 0) {
+      fn();
+    }
+    if (g > 0) y.lShiftTo(g, y);
+    return y;
   }
-  if (g > 0) y.lShiftTo(g, y);
-  return y;
 }
 
 // (protected) this % n, n < 2^26
