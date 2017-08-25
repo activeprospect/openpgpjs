@@ -14850,7 +14850,7 @@ exports.default = {
   tolerant: true, // ignore unsupported/unrecognizable packets instead of throwing an error
   show_version: true,
   show_comment: true,
-  versionstring: "OpenPGP.js v2.6.8-rc.6",
+  versionstring: "OpenPGP.js v2.6.8-rc.7",
   commentstring: "https://openpgpjs.org",
   keyserver: "https://keyserver.ubuntu.com",
   node_store: './openpgp.store'
@@ -21754,20 +21754,6 @@ function bnGCD(a) {
     x.rShiftTo(g, x);
     y.rShiftTo(g, y);
   }
-<<<<<<< HEAD
-  var fn = function fn() {
-    if ((i = x.getLowestSetBit()) > 0) x.rShiftTo(i, x);
-    if ((i = y.getLowestSetBit()) > 0) y.rShiftTo(i, y);
-    if (x.compareTo(y) >= 0) {
-      x.subTo(y, x);
-      x.rShiftTo(1, x);
-    } else {
-      y.subTo(x, y);
-      y.rShiftTo(1, y);
-    }
-  };
-=======
->>>>>>> kellym/master
   if (this.async) {
     x.async = true;
     var fn = function fn(done) {
