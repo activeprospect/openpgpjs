@@ -22207,19 +22207,24 @@ function RSA() {
       key.e = parseInt(E, 16);
       key.ee = new _jsbn2.default(E, 16);
 
-      for (;;) {
-        for (;;) {
-          key.p = new _jsbn2.default(B - qs, 1, rng);
-          if (key.p.subtract(_jsbn2.default.ONE).gcd(key.ee).compareTo(_jsbn2.default.ONE) === 0 && key.p.isProbablePrime(10)) {
-            break;
-          }
+      var determineP = function determineP() {
+        key.p = new _jsbn2.default(B - qs, 1, rng);
+        if (key.p.subtract(_jsbn2.default.ONE).gcd(key.ee).compareTo(_jsbn2.default.ONE) === 0 && key.p.isProbablePrime(10)) {
+          determineQ();
+        } else {
+          setTimeout(determineP, 0);
         }
-        for (;;) {
-          key.q = new _jsbn2.default(qs, 1, rng);
-          if (key.q.subtract(_jsbn2.default.ONE).gcd(key.ee).compareTo(_jsbn2.default.ONE) === 0 && key.q.isProbablePrime(10)) {
-            break;
-          }
+      };
+      var determineQ = function determineQ() {
+        key.q = new _jsbn2.default(qs, 1, rng);
+        if (key.q.subtract(_jsbn2.default.ONE).gcd(key.ee).compareTo(_jsbn2.default.ONE) === 0 && key.q.isProbablePrime(10)) {
+          finalize();
+        } else {
+          setTimeout(determineQ, 0);
         }
+      };
+
+      var finalize = function finalize() {
         if (key.p.compareTo(key.q) <= 0) {
           var t = key.p;
           key.p = key.q;
@@ -22234,11 +22239,13 @@ function RSA() {
           key.dmp1 = key.d.mod(p1);
           key.dmq1 = key.d.mod(q1);
           key.u = key.p.modInverse(key.q);
-          break;
+          resolve(key);
+        } else {
+          setTimeout(finalize, 0);
         }
-      }
+      };
 
-      resolve(key);
+      determineP();
     });
   }
 
@@ -31299,10 +31306,9 @@ function MessageStream(_ref) {
   var privateKeys = _ref.privateKeys;
   var passwords = _ref.passwords;
   var filename = _ref.filename;
+  var compression = _ref.compression;
   var _ref$armor = _ref.armor;
   var armor = _ref$armor === undefined ? true : _ref$armor;
-  var _ref$compression = _ref.compression;
-  var compression = _ref$compression === undefined ? 'zip' : _ref$compression;
   var _ref$detached = _ref.detached;
   var detached = _ref$detached === undefined ? false : _ref$detached;
   var _ref$signature = _ref.signature;
@@ -31362,7 +31368,7 @@ function MessageStream(_ref) {
     }
   });
 
-  if (compression) {
+  if (compression && compression !== 'uncompressed') {
     this.compressionPacket = new _compression2.default({ algorithm: _enums2.default.write(_enums2.default.compression, compression === true ? 'zip' : compression) });
     this.compressionPacket.on('data', function (data) {
       self.cipher.write(Buffer.from(data));
@@ -32112,7 +32118,7 @@ exports.default = {
   },
 
   isReadableStream: function isReadableStream(data) {
-    return data && (typeof data === 'undefined' ? 'undefined' : _typeof(data)) === 'object' && typeof data.pipe === 'function' && data.readable !== false && typeof data._read === 'function' && _typeof(data._readableState) === 'object';
+    return data && (typeof data === 'undefined' ? 'undefined' : _typeof(data)) === 'object' && typeof data.pipe === 'function';
   },
 
   isEmailAddress: function isEmailAddress(data) {
