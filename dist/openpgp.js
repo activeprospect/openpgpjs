@@ -14850,7 +14850,7 @@ exports.default = {
   tolerant: true, // ignore unsupported/unrecognizable packets instead of throwing an error
   show_version: true,
   show_comment: true,
-  versionstring: "OpenPGP.js v2.6.8-rc.7",
+  versionstring: "OpenPGP.js v2.6.8-rc.8",
   commentstring: "https://openpgpjs.org",
   keyserver: "https://keyserver.ubuntu.com",
   node_store: './openpgp.store'
@@ -22390,11 +22390,8 @@ function RSA() {
       key.ee = new _jsbn2.default(E, 16);
 
       var determineP = function determineP() {
-        console.log('starting to determine p');
         key.p = new _jsbn2.default(B - qs, 1, rng, true);
-        console.log('big int started');
         key.p.on('ready', function () {
-          console.log('p key is ready');
           key.p.async = true;
           key.p.subtract(_jsbn2.default.ONE).gcd(key.ee).then(function (y) {
             y.compareTo(_jsbn2.default.ONE).then(function (r) {
