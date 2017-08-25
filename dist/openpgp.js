@@ -20563,14 +20563,37 @@ function bnAbs() {
 // (public) return + if this > a, - if this < a, 0 if equal
 
 function bnCompareTo(a) {
+  var _this = this;
+
   var r = this.s - a.s;
-  if (r != 0) return r;
+  if (r != 0) return this.async ? Promise.resolve(r) : r;
   var i = this.t;
   r = i - a.t;
-  if (r != 0) return this.s < 0 ? -r : r;
-  while (--i >= 0) {
-    if ((r = this[i] - a[i]) != 0) return r;
-  }return 0;
+  if (r != 0) {
+    var v = this.s < 0 ? -r : r;
+    return this.async ? Promise.resolve(v) : v;
+  }
+  if (this.async) {
+    return new Promise(function (resolve) {
+      var loop = function loop() {
+        i--;
+        if (i >= 0) {
+          if ((r = _this[i] - a[i]) != 0) {
+            resolve(r);
+          } else {
+            setTimeout(loop, 0);
+          }
+        } else {
+          resolve(0);
+        }
+      };
+      loop();
+    });
+  } else {
+    while (--i >= 0) {
+      if ((r = this[i] - a[i]) != 0) return r;
+    }return 0;
+  }
 }
 
 // returns bit length of the integer x
@@ -21731,6 +21754,7 @@ function bnGCD(a) {
     x.rShiftTo(g, x);
     y.rShiftTo(g, y);
   }
+<<<<<<< HEAD
   var fn = function fn() {
     if ((i = x.getLowestSetBit()) > 0) x.rShiftTo(i, x);
     if ((i = y.getLowestSetBit()) > 0) y.rShiftTo(i, y);
@@ -21742,14 +21766,33 @@ function bnGCD(a) {
       y.rShiftTo(1, y);
     }
   };
+=======
+>>>>>>> kellym/master
   if (this.async) {
+    x.async = true;
+    var fn = function fn(done) {
+      if ((i = x.getLowestSetBit()) > 0) x.rShiftTo(i, x);
+      if ((i = y.getLowestSetBit()) > 0) y.rShiftTo(i, y);
+      x.compareTo(y).then(function (r) {
+        if (r >= 0) {
+          x.subTo(y, x);
+          x.rShiftTo(1, x);
+        } else {
+          y.subTo(x, y);
+          y.rShiftTo(1, y);
+        }
+        done();
+      });
+    };
     return new Promise(function (resolve) {
       var loop = function loop() {
         if (x.signum() > 0) {
-          fn();
-          setTimeout(loop, 0);
+          fn(function () {
+            setTimeout(loop, 0);
+          });
         } else {
           if (g > 0) y.lShiftTo(g, y);
+          y.async = true;
           return resolve(y);
         }
       };
@@ -21757,7 +21800,15 @@ function bnGCD(a) {
     });
   } else {
     while (x.signum() > 0) {
-      fn();
+      if ((i = x.getLowestSetBit()) > 0) x.rShiftTo(i, x);
+      if ((i = y.getLowestSetBit()) > 0) y.rShiftTo(i, y);
+      if (x.compareTo(y) >= 0) {
+        x.subTo(y, x);
+        x.rShiftTo(1, x);
+      } else {
+        y.subTo(x, y);
+        y.rShiftTo(1, y);
+      }
     }
     if (g > 0) y.lShiftTo(g, y);
     return y;
@@ -22230,22 +22281,26 @@ function RSA() {
         key.p = new _jsbn2.default(B - qs, 1, rng);
         key.p.async = true;
         key.p.subtract(_jsbn2.default.ONE).gcd(key.ee).then(function (y) {
-          if (y.compareTo(_jsbn2.default.ONE) === 0 && key.p.isProbablePrime(10)) {
-            determineQ();
-          } else {
-            setTimeout(determineP, 0);
-          }
+          y.compareTo(_jsbn2.default.ONE).then(function (r) {
+            if (r === 0 && key.p.isProbablePrime(10)) {
+              determineQ();
+            } else {
+              setTimeout(determineP, 0);
+            }
+          });
         });
       };
       var determineQ = function determineQ() {
         key.q = new _jsbn2.default(qs, 1, rng);
         key.q.async = true;
         key.q.subtract(_jsbn2.default.ONE).gcd(key.ee).then(function (y) {
-          if (y.compareTo(_jsbn2.default.ONE) === 0 && key.q.isProbablePrime(10)) {
-            finalize();
-          } else {
-            setTimeout(determineQ, 0);
-          }
+          y.compareTo(_jsbn2.default.ONE).then(function (r) {
+            if (r === 0 && key.q.isProbablePrime(10)) {
+              finalize();
+            } else {
+              setTimeout(determineQ, 0);
+            }
+          });
         });
       };
 
