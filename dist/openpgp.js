@@ -22207,19 +22207,24 @@ function RSA() {
       key.e = parseInt(E, 16);
       key.ee = new _jsbn2.default(E, 16);
 
-      for (;;) {
-        for (;;) {
-          key.p = new _jsbn2.default(B - qs, 1, rng);
-          if (key.p.subtract(_jsbn2.default.ONE).gcd(key.ee).compareTo(_jsbn2.default.ONE) === 0 && key.p.isProbablePrime(10)) {
-            break;
-          }
+      var determineP = function determineP() {
+        key.p = new _jsbn2.default(B - qs, 1, rng);
+        if (key.p.subtract(_jsbn2.default.ONE).gcd(key.ee).compareTo(_jsbn2.default.ONE) === 0 && key.p.isProbablePrime(10)) {
+          determineQ();
+        } else {
+          setTimeout(determineP, 0);
         }
-        for (;;) {
-          key.q = new _jsbn2.default(qs, 1, rng);
-          if (key.q.subtract(_jsbn2.default.ONE).gcd(key.ee).compareTo(_jsbn2.default.ONE) === 0 && key.q.isProbablePrime(10)) {
-            break;
-          }
+      };
+      var determineQ = function determineQ() {
+        key.q = new _jsbn2.default(qs, 1, rng);
+        if (key.q.subtract(_jsbn2.default.ONE).gcd(key.ee).compareTo(_jsbn2.default.ONE) === 0 && key.q.isProbablePrime(10)) {
+          finalize();
+        } else {
+          setTimeout(determineQ, 0);
         }
+      };
+
+      var finalize = function finalize() {
         if (key.p.compareTo(key.q) <= 0) {
           var t = key.p;
           key.p = key.q;
@@ -22234,11 +22239,13 @@ function RSA() {
           key.dmp1 = key.d.mod(p1);
           key.dmq1 = key.d.mod(q1);
           key.u = key.p.modInverse(key.q);
-          break;
+          resolve(key);
+        } else {
+          setTimeout(finalize, 0);
         }
-      }
+      };
 
-      resolve(key);
+      determineP();
     });
   }
 
