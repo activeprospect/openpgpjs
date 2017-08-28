@@ -14850,7 +14850,7 @@ exports.default = {
   tolerant: true, // ignore unsupported/unrecognizable packets instead of throwing an error
   show_version: true,
   show_comment: true,
-  versionstring: "OpenPGP.js v2.6.8-rc.8",
+  versionstring: "OpenPGP.js v2.6.8-rc.9",
   commentstring: "https://openpgpjs.org",
   keyserver: "https://keyserver.ubuntu.com",
   node_store: './openpgp.store'
@@ -20613,7 +20613,7 @@ function bnCompareTo(a) {
           if ((r = _this2[i] - a[i]) != 0) {
             resolve(r);
           } else {
-            setTimeout(loop, 0);
+            _util3.default.setImmediate(loop);
           }
         } else {
           resolve(0);
@@ -21221,7 +21221,7 @@ function bnpFromNumber(a, b, c) {
                 if (!r) {
                   _this3.dAddOffset(2, 0);
                   if (_this3.bitLength() > a) _this3.subTo(BigInteger.ONE.shiftLeft(a - 1), _this3);
-                  setTimeout(loop, 0);
+                  _util3.default.setImmediate(loop);
                 } else {
                   resolve(_this3);
                 }
@@ -21801,7 +21801,7 @@ function bnModPow(e, m) {
       var loop = function loop() {
         if (j >= 0) {
           fn();
-          setTimeout(loop, 0);
+          _util3.default.setImmediate(loop);
         } else {
           resolve(z.revert(r));
         }
@@ -21854,7 +21854,7 @@ function bnGCD(a) {
       var loop = function loop() {
         if (x.signum() > 0) {
           fn(function () {
-            setTimeout(loop, 0);
+            _util3.default.setImmediate(loop);
           });
         } else {
           if (g > 0) y.lShiftTo(g, y);
@@ -22055,7 +22055,7 @@ function bnpMillerRabin(t) {
       var loop = function loop() {
         if (i < t) {
           fn(function () {
-            return setTimeout(loop, 0);
+            return _util3.default.setImmediate(loop);
           });
           i++;
         } else {
@@ -22398,7 +22398,7 @@ function RSA() {
               if (r === 0 && key.p.isProbablePrime(10)) {
                 determineQ();
               } else {
-                setTimeout(determineP, 0);
+                _util2.default.setImmediate(determineP);
               }
             });
           });
@@ -22413,7 +22413,7 @@ function RSA() {
               if (r === 0 && key.q.isProbablePrime(10)) {
                 finalize();
               } else {
-                setTimeout(determineQ, 0);
+                _util2.default.setImmediate(determineQ);
               }
             });
           });
@@ -22437,7 +22437,7 @@ function RSA() {
           key.u = key.p.modInverse(key.q);
           resolve(key);
         } else {
-          setTimeout(finalize, 0);
+          _util2.default.setImmediate(finalize);
         }
       };
 
@@ -32299,7 +32299,7 @@ var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = {
+var util = {
 
   isString: function isString(data) {
     return typeof data === 'string' || String.prototype.isPrototypeOf(data);
@@ -32845,6 +32845,16 @@ exports.default = {
   }
 
 };
+
+if (typeof setImmediate === 'function') {
+  util.setImmediate = setImmediate;
+} else {
+  util.setImmediate = function (fn) {
+    setTimeout(fn, 0);
+  };
+}
+
+exports.default = util;
 
 }).call(this,require("buffer").Buffer)
 },{"./config":47,"buffer":"buffer","crypto":"crypto"}],118:[function(require,module,exports){
