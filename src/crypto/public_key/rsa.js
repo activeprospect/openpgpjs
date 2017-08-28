@@ -235,7 +235,7 @@ export default function RSA() {
               if (r === 0 && key.p.isProbablePrime(10)) {
                 determineQ();
               } else {
-                setTimeout(determineP, 0);
+                util.setImmediate(determineP);
               }
             });
           });
@@ -250,7 +250,7 @@ export default function RSA() {
               if (r === 0 && key.q.isProbablePrime(10)) {
                 finalize();
               } else {
-                setTimeout(determineQ, 0);
+                util.setImmediate(determineQ);
               }
             });
           });
@@ -274,7 +274,7 @@ export default function RSA() {
           key.u = key.p.modInverse(key.q);
           resolve(key);
         } else {
-          setTimeout(finalize, 0);
+          util.setImmediate(finalize);
         }
       };
 

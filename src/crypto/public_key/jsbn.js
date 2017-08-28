@@ -325,7 +325,7 @@ function bnCompareTo(a) {
           if ((r = this[i] - a[i]) != 0) {
             resolve(r);
           } else {
-            setTimeout(loop, 0);
+            _util.setImmediate(loop);
           }
         } else {
           resolve(0);
@@ -945,7 +945,7 @@ function bnpFromNumber(a, b, c) {
                 if (!r) {
                   this.dAddOffset(2, 0);
                   if (this.bitLength() > a) this.subTo(BigInteger.ONE.shiftLeft(a - 1), this);
-                  setTimeout(loop, 0);
+                  _util.setImmediate(loop);
                 } else {
                   resolve(this);
                 }
@@ -1523,7 +1523,7 @@ function bnModPow(e, m) {
       var loop = () => {
         if (j >= 0) {
           fn();
-          setTimeout(loop, 0);
+          _util.setImmediate(loop);
         } else {
           resolve(z.revert(r));
         }
@@ -1576,7 +1576,7 @@ function bnGCD(a) {
     return new Promise(function(resolve) {
       var loop = function() {
         if (x.signum() > 0) {
-          fn(() => { setTimeout(loop, 0); });
+          fn(() => { _util.setImmediate(loop); });
         } else {
           if (g > 0) y.lShiftTo(g, y);
           y.async = true;
@@ -1775,7 +1775,7 @@ function bnpMillerRabin(t) {
       };
       var loop = () => {
         if (i < t) {
-          fn(() => setTimeout(loop, 0));
+          fn(() => _util.setImmediate(loop));
           i++;
         } else {
           resolve(true);
